@@ -16,12 +16,12 @@ class CreateRequirementsTable extends Migration {
 		{
 			//$table->increments('id');
 			//$table->timestamps();
-			$table->integer('req_id')->unique();
+			$table->increments('req_id');
+			//$table->integer('req_id')->unique();
 			$table->string('req_category');
 			$table->integer('req_percentage')->unsigned();
 			$table->string('cla_subject_code');
-			$table->primary('req_id');
-			$table->increments('req_id');
+			//$table->primary('req_id');
 		});
 	}
 

@@ -16,11 +16,11 @@ class CreateActivitiesTable extends Migration {
 		{
 			//$table->increments('id');
 			//$table->timestamps();
-			$table->integer('req_id');
+			//$table->integer('req_id');
+			$table->increments('act_id');
 		$table->string('act_name');
-		$table->integer('act_id')->unsigned();
-		$table->primary('act_id');
-		$table->increments('act_id');
+		//$table->integer('act_id')->unsigned();
+		//$table->primary('act_id');
 		});
 	}
 
