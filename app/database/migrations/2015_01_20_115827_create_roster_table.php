@@ -12,8 +12,10 @@ class CreateRosterTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('roster', function(Blueprint $table)
+		Schema::create('roster', function(Blueprint $table)
 		{
+			//$table->increments('id');
+			//$table->timestamps();
 			$table->string('cla_subject_code');
 			$table->string('stu_id_number');
 		});

@@ -12,12 +12,16 @@ class CreateRequirementsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('requirement', function(Blueprint $table)
+		Schema::create('requirement', function(Blueprint $table)
 		{
-		    $table->integer('req_id')->unique();
+			//$table->increments('id');
+			//$table->timestamps();
+			$table->integer('req_id')->unique();
 			$table->string('req_category');
 			$table->integer('req_percentage')->unsigned();
+			$table->string('cla_subject_code');
 			$table->primary('req_id');
+			$table->increments('req_id');
 		});
 	}
 

@@ -12,9 +12,11 @@ class CreateClassTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('class', function(Blueprint $table)
+		Schema::create('class', function(Blueprint $table)
 		{
-		$table->string('cla_catalogue_number');
+			//$table->increments('id');
+			//$table->timestamps();
+			$table->string('cla_catalogue_number');
 		$table->string('cla_room');
 		$table->string('cla_type');//lab or lec
 		$table->string('cla_time');

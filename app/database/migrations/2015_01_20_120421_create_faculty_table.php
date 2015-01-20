@@ -12,8 +12,10 @@ class CreateFacultyTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('faculty', function(Blueprint $table)
+		Schema::create('faculty', function(Blueprint $table)
 		{
+			//$table->increments('id');
+			//$table->timestamps();
 			$table->string('fac_designation');
 			$table->string('fac_role');
 			$table->string('fac_last_name');
@@ -31,10 +33,7 @@ class CreateFacultyTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('faculty', function(Blueprint $table)
-		{
-			//
-		});
+		Schema::drop('faculty');
 	}
 
 }
