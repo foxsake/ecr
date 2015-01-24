@@ -10,7 +10,8 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
-Route::get('/', 'HomeController@index');
-
+Route::get('login', 'SessionsController@create');
+Route::get('logout', 'SessionsController@destroy');
+Route::resource('sessions','SessionsController',['only' => ['store','create','destroy']]);
+Route::get('/', 'HomeController@index')->before('auth');
 Route::get('about', 'HomeController@about');
