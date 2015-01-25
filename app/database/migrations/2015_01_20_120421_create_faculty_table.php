@@ -16,7 +16,7 @@ class CreateFacultyTable extends Migration {
 		{
 			//$table->increments('id');
 			//$table->timestamps();
-			$table->string('fac_designation');
+			//$table->string('fac_designation');
 			$table->string('fac_role');
 			$table->string('fac_last_name');
 			$table->string('fac_first_name');

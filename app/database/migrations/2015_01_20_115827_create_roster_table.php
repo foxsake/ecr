@@ -16,8 +16,8 @@ class CreateRosterTable extends Migration {
 		{
 			//$table->increments('id');
 			//$table->timestamps();
-			$table->string('cla_subject_code');
-			$table->string('stu_id_number');
+			$table->string('ros_cla_subject_code');
+			$table->string('ros_stu_id_number');
 		});
 	}
 
