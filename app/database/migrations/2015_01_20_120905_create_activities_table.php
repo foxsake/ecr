@@ -19,6 +19,8 @@ class CreateActivitiesTable extends Migration {
 			$table->increments('act_id');
 			$table->integer('act_req_id');
 			$table->string('act_name');
+			$table->decimal('act_max_score');
+			$table->string('actt_term');
 			//$table->primary('act_id');
 		});
 	}

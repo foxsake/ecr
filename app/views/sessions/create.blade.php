@@ -1,16 +1,23 @@
-<h1>login</h1>
-{{ Form::open(array('route' => 'sessions.store'))}}
-<ul>
-    <li>
-        {{Form::label('username',"Username:")}}
-        {{Form::text('username')}}
-    </li>
-    <li>
-        {{Form::label('password',"Password:")}}
-        {{Form::password('password')}}
-    </li>
-    <li>
-        {{Form::submit()}}
-    </li>
-</ul>
-{{Form::close()}}
+@extends('master')
+@section('title')
+    Login
+@stop
+@section('content')
+        <div class="form-horizontal">
+        <h1>Login</h1>
+        {{ Form::open(array('route' => 'sessions.store','class'=>'form-horizontal'))}}
+        <div class="form-group">
+            {{Form::label('username',"Username:")}}
+            {{Form::text('username',Input::old('username'))}}
+        </div>
+        <div class="form-group">
+            {{Form::label('password',"Password:")}}
+            {{Form::password('password')}}
+        </div>
+        <div class="form-group">
+            {{Form::submit('Login',array('class'=>'btn btn-default'))}}
+        </div>
+        {{Form::close()}}
+        </div>
+@stop
+

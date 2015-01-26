@@ -16,9 +16,9 @@ class CreateGradesTable extends Migration {
 		{
 			//$table->increments('id');
 			//$table->timestamps();
-			$table->decimal('score',10,2);
-			$table->string('stu_id_number');
-			$table->integer('act_id');
+			$table->decimal('gra_score',10,2);
+			$table->string('gra_stu_id_number');
+			$table->integer('gra_act_id');
 		});
 	}
 
