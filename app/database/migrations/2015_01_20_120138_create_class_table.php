@@ -23,7 +23,7 @@ class CreateClassTable extends Migration {
 			$table->string('cla_day');
 			$table->string('cla_subject_code')->unique();
 			$table->primary('cla_subject_code');
-			//$table->timestamps();
+			$table->timestamps();
 		});
 	}
 

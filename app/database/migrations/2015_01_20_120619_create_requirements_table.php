@@ -15,11 +15,11 @@ class CreateRequirementsTable extends Migration {
 		Schema::create('requirement', function(Blueprint $table)
 		{
 			//$table->increments('id');
-			//$table->timestamps();
 			$table->increments('req_id');
 			$table->string('req_category');
 			$table->integer('req_percentage')->unsigned();
 			$table->string('req_subject_code');
+			$table->timestamps();
 			//$table->primary('req_id');
 		});
 	}

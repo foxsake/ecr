@@ -15,9 +15,9 @@ class CreateRosterTable extends Migration {
 		Schema::create('roster', function(Blueprint $table)
 		{
 			//$table->increments('id');
-			//$table->timestamps();
 			$table->string('ros_cla_subject_code');
 			$table->string('ros_stu_id_number');
+			$table->timestamps();
 		});
 	}
 

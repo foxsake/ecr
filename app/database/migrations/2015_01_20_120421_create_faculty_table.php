@@ -15,7 +15,7 @@ class CreateFacultyTable extends Migration {
 		Schema::create('faculty', function(Blueprint $table)
 		{
 			//$table->increments('id');
-			//$table->timestamps();
+			
 			//$table->string('fac_designation');
 			$table->string('fac_role');
 			$table->string('fac_last_name');
@@ -23,6 +23,7 @@ class CreateFacultyTable extends Migration {
 			$table->string('fac_mi');
 			$table->string('fac_id_number')->unique();
 			$table->primary('fac_id_number');
+			$table->timestamps();
 		});
 	}
 

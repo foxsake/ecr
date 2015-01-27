@@ -15,10 +15,10 @@ class CreateGradesTable extends Migration {
 		Schema::create('grade', function(Blueprint $table)
 		{
 			//$table->increments('id');
-			//$table->timestamps();
 			$table->decimal('gra_score',10,2);
 			$table->string('gra_stu_id_number');
 			$table->integer('gra_act_id');
+			$table->timestamps();
 		});
 	}
 
