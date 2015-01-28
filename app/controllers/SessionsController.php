@@ -27,9 +27,9 @@ class SessionsController extends \BaseController {
 		    'password'=>$input['password']
 		]);
 		if($attempt)
-		    if(strcmp(Auth::user()->role,"super-user")==0) return Redirect::intended('about');
+		    if(strcmp(Auth::user()->role,"super-user")==0) return Redirect::action('SuperUserController@index');
 		    else return Redirect::intended('/');
-		dd('problem');
+		//dd('problem');
 	}
 
 	/**

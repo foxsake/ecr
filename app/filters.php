@@ -88,3 +88,23 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+/*
+|--------------------------------------------------------------------------
+| Roles Protection Filter
+|--------------------------------------------------------------------------
+| acces shit.
+|
+*/
+
+Route::filter('role', function()
+{
+	if (Auth::guest())
+	{
+		return Redirect::guest('/');
+	}
+    if(Auth::user()->role != 'super-user') 
+    {
+        return Redirect::to('/');
+    }
+});

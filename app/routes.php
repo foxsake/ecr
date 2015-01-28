@@ -13,5 +13,10 @@
 Route::get('login', 'SessionsController@create');
 Route::get('logout', 'SessionsController@destroy');
 Route::resource('sessions','SessionsController',['only' => ['store','create','destroy']]);
+Route::group(array('before' => 'role'), function()
+{
+	Route::resource('administrator','SuperUserController',['only' => ['store','create','destroy','index']]);
+	Route::resource('users','UsersController');
+});
 Route::get('/', 'HomeController@index')->before('auth');
 Route::get('about', 'HomeController@about');
