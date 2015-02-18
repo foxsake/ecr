@@ -26,7 +26,8 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('*.koding.io',gethostname()),
+	//'local' => array('*.koding.io',gethostname()),
+	'local' => array('localhost',gethostname()),
 
 ));
 

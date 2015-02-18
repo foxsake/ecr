@@ -14,15 +14,15 @@ class CreateClassTable extends Migration {
 	{
 		Schema::create('class', function(Blueprint $table)
 		{
-			//$table->increments('id');
-			$table->string('cla_catalogue_number');
-			$table->string('cla_room');
-			$table->string('cla_type');//lab or lec
-			$table->string('cla_lec_subject_code');//null if nothing
-			$table->string('cla_time');
-			$table->string('cla_day');
-			$table->string('cla_subject_code')->unique();
-			$table->primary('cla_subject_code');
+			$table->increments('id');
+			$table->string('catalogue_number');
+			$table->string('room');
+			$table->string('type');//lab or lec
+			$table->string('lec_subject_code');//null if nothing
+			$table->string('time');
+			$table->string('day');
+			$table->string('subject_code')->unique();
+			//$table->primary('subject_code');
 			$table->timestamps();
 		});
 	}

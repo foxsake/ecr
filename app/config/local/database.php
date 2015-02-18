@@ -23,9 +23,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'laraveldb',
+			'database'  => 'ecr_db',//laraveldb
 			'username'  => 'root',
-			'password'  => 'qwaszx123',
+			'password'  => '',//qwaszx123
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

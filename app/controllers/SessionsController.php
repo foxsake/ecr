@@ -29,6 +29,8 @@ class SessionsController extends \BaseController {
 		if($attempt)
 		    if(strcmp(Auth::user()->role,"super-user")==0) return Redirect::action('SuperUserController@index');
 		    else return Redirect::intended('/');
+		else
+			return Redirect::intended('/login');
 		//dd('problem');
 	}
 

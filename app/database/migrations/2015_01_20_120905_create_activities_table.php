@@ -14,12 +14,11 @@ class CreateActivitiesTable extends Migration {
 	{
 		Schema::create('activity', function(Blueprint $table)
 		{
-			//$table->increments('id');
-			$table->increments('act_id');
-			$table->integer('act_req_id');
-			$table->string('act_name');
-			$table->decimal('act_max_score');
-			$table->string('actt_term');
+			$table->increments('id');
+			$table->integer('req_id');
+			$table->string('name');
+			$table->decimal('max_score');
+			$table->string('term');
 			$table->timestamps();
 			//$table->primary('act_id');
 		});

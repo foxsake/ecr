@@ -14,11 +14,11 @@ class CreateGradesTable extends Migration {
 	{
 		Schema::create('grade', function(Blueprint $table)
 		{
-			//$table->increments('id');
-			$table->decimal('gra_score',10,2);
-			$table->string('gra_stu_id_number');
-			$table->integer('gra_act_id');
-			$table->timestamps();
+			$table->increments('id');
+			$table->decimal('score',10,2);
+			$table->string('id_number');
+			$table->integer('act_id');
+			$table->timestamps();//bookeeping
 		});
 	}
 
