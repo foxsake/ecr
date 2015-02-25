@@ -1,54 +1,43 @@
 <?php
 
-class UsersController extends \BaseController {
+class StudentController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
-	 * GET /users
+	 * GET /student
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		$leads = User::all();
-		return View::make('users.index',compact('leads'));
+		//
 	}
 
 	/**
 	 * Show the form for creating a new resource.
-	 * GET /users/create
+	 * GET /student/create
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-		return View::make('users.create');
+		//
 	}
 
 	/**
 	 * Store a newly created resource in storage.
-	 * POST /users
+	 * POST /student
 	 *
 	 * @return Response
 	 */
 	public function store()
 	{
-		//todo!
-		$input = Input::all();
-		$user = new User;
-		if($input['password'] == $input['password2'])
-			$user->password = Hash::make($input['password']);
-		else
-			return Redirect::intended('/users');
-		$user->username = $input['username'];
-		//$user->role = $input['instructor'];
-		$user->save();
-		return Redirect::action("SuperUserController@index");
+		//
 	}
 
 	/**
 	 * Display the specified resource.
-	 * GET /users/{id}
+	 * GET /student/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -60,7 +49,7 @@ class UsersController extends \BaseController {
 
 	/**
 	 * Show the form for editing the specified resource.
-	 * GET /users/{id}/edit
+	 * GET /student/{id}/edit
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -72,7 +61,7 @@ class UsersController extends \BaseController {
 
 	/**
 	 * Update the specified resource in storage.
-	 * PUT /users/{id}
+	 * PUT /student/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -84,7 +73,7 @@ class UsersController extends \BaseController {
 
 	/**
 	 * Remove the specified resource from storage.
-	 * DELETE /users/{id}
+	 * DELETE /student/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response

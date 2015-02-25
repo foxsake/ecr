@@ -11,3 +11,7 @@ $s->mi = 'A';
 $s->id_number = '12-1139';
 $s->section = 'BSIT 3-2';
 $s->save();
+
+
+{{ Form::open(array('route' => 'faculty.store','class'=>'form-horizontal'))}}
+{{ Form::open(array('route' => ['faculty.update', $fac->id], 'method' => 'put', 'class'=>'form-horizontal'))}}

@@ -17,6 +17,7 @@ Route::group(array('before' => 'role'), function()
 {
 	Route::resource('administrator','SuperUserController',['only' => ['store','create','destroy','index']]);
 	Route::resource('users','UsersController');
+	Route::resource('faculty','FacultyController',['only' => ['store','create','destroy','index','update','edit']]);
 });
 Route::get('/', 'HomeController@index')->before('auth');
 Route::get('about', 'HomeController@about');
