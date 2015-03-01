@@ -1,9 +1,10 @@
 @extends('master')
 @section('title')
-    Manage Users
+    Class Students
 @stop
 @section('content')
-    <h1>Manage Accounts</h1>
+    <h1>Manage Roster</h1>
+    <div><a href="{{URL::to('admin/roster/create')}}">Add Student</a></div>
     <div>
     <table class="table table-bordered table-hover">
     <thead>
@@ -12,6 +13,7 @@
             <th>Last Name</th>
             <th>First Name</th>
             <th>Middle Initial</th>
+            <th>Section</th>
             <th></th>
             <th></th>
         </tr>
@@ -23,13 +25,14 @@
                 <td>{{$lead->last_name}}</td>
                 <td>{{$lead->first_name}}</td>
                 <td>{{$lead->mi}}</td>
+                <td>{{$lead->section}}</td>
                 <td>
-                    {{ Form::open(array('route' => array('faculty.edit',$lead->id), 'method' => 'get')) }}
+                    {{ Form::open(array('route' => array('admin.roster.edit',$lead->id), 'method' => 'get')) }}
                         <button type="submit" class="btn btn-warning btn-xs">Edit</button>
                     {{ Form::close() }}
                 </td>
                 <td>
-                    {{ Form::open(array('route' => array('faculty.destroy', $lead->id), 'method' => 'delete')) }}
+                    {{ Form::open(array('route' => array('admin.roster.destroy', $lead->id), 'method' => 'delete')) }}
                         <button type="submit" class="btn btn-danger btn-xs">Delete</button>
                     {{ Form::close() }}
                 </td>
@@ -38,5 +41,5 @@
     </tbody>
 	</table>
 	</div>
-    <div><a href="{{URL::to('faculty/create')}}">Create Account</a></div>
+    
 @stop

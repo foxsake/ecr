@@ -21,7 +21,7 @@ class RosterController extends \BaseController {
 	 */
 	public function create()
 	{
-		
+		return View::make('admin.roster.form');
 	}
 
 	/**
@@ -37,7 +37,7 @@ class RosterController extends \BaseController {
 		$s->subject_code = $input['subject_code'];
 		$s->id_number = $input['id_number'];
 		$s->save();
-		return Redirect::action('StudentController@index');//change
+		return Redirect::action('ClassController@index');//change
 	}
 
 	/**
@@ -61,7 +61,7 @@ class RosterController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		dd("Does not work yet");
 	}
 
 	/**
@@ -85,7 +85,8 @@ class RosterController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		Roster::find($id)->delete();
+		return Redirect::action('ClassController@index');
 	}
 
 }

@@ -19,6 +19,7 @@
             <th>Instructor</th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -32,6 +33,11 @@
                 <td>{{$lead->type}}</td>
                 <td>{{$lead->lec_subject_code}}</td>
                 <td>{{($lead->last_name . ", ".$lead->first_name." ".$lead->mi.".")}}</td>
+                <td>
+                    {{ Form::open(array('route' => array('admin.class.show',$lead->id), 'method' => 'get')) }}
+                        <button type="submit" class="btn btn-success btn-xs">View</button>
+                    {{ Form::close() }}
+                </td>
                 <td>
                     {{ Form::open(array('route' => array('admin.class.edit',$lead->id), 'method' => 'get')) }}
                         <button type="submit" class="btn btn-warning btn-xs">Edit</button>

@@ -58,7 +58,16 @@ class ClassController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//TODO
+		$c = Classes::find($id);
+		$leads = DB::table('student')
+        ->join('roster', function($join) use( &$c)
+        {
+            $join->on('student.id_number', '=', 'roster.id_number')
+                 ->where('roster.subject_code','=', $c->subject_code);
+        })
+        ->orderBy('last_name')
+        ->get();
+		return View::make('admin.class.show',compact('leads'));
 	}
 
 	/**

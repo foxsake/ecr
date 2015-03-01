@@ -1,1 +1,0 @@
-C:\xampp\htdocs\ecr\app/views/student/index.blade.php
