@@ -1,43 +1,48 @@
 <?php
 
-class SuperUserController extends \BaseController {
+class RosterController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
-	 * GET /superuser
+	 * GET /roster
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		return View::make('admin.super');
+		//
 	}
 
 	/**
 	 * Show the form for creating a new resource.
-	 * GET /superuser/create
+	 * GET /roster/create
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-		//return View::make('administrator.create');
+		
 	}
 
 	/**
 	 * Store a newly created resource in storage.
-	 * POST /superuser
+	 * POST /roster
 	 *
 	 * @return Response
 	 */
 	public function store()
 	{
-		//
+		$input = Input::all();
+		$s = new Roster;
+		$s->subject_code = $input['subject_code'];
+		$s->id_number = $input['id_number'];
+		$s->save();
+		return Redirect::action('StudentController@index');//change
 	}
 
 	/**
 	 * Display the specified resource.
-	 * GET /superuser/{id}
+	 * GET /roster/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -49,7 +54,7 @@ class SuperUserController extends \BaseController {
 
 	/**
 	 * Show the form for editing the specified resource.
-	 * GET /superuser/{id}/edit
+	 * GET /roster/{id}/edit
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -61,7 +66,7 @@ class SuperUserController extends \BaseController {
 
 	/**
 	 * Update the specified resource in storage.
-	 * PUT /superuser/{id}
+	 * PUT /roster/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -73,7 +78,7 @@ class SuperUserController extends \BaseController {
 
 	/**
 	 * Remove the specified resource from storage.
-	 * DELETE /superuser/{id}
+	 * DELETE /roster/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response

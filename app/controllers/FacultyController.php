@@ -11,7 +11,7 @@ class FacultyController extends \BaseController {
 	public function index()
 	{
 		$leads = Faculty::all();
-		return View::make('faculty.index',compact('leads'));
+		return View::make('admin.faculty.index',compact('leads'));
 	}
 
 	/**
@@ -22,7 +22,7 @@ class FacultyController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('faculty.form');
+		return View::make('admin.faculty.form');
 	}
 
 	/**
@@ -73,7 +73,7 @@ class FacultyController extends \BaseController {
 	public function edit($id)
 	{
 		$fac = Faculty::find($id);
-		return View::make('faculty.form',compact('fac'));
+		return View::make('admin.faculty.form',compact('fac'));
 	}
 
 	/**

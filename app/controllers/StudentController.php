@@ -10,7 +10,8 @@ class StudentController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$leads = Student::orderBy('last_name')->get();
+		return View::make('admin.student.index',compact('leads'));
 	}
 
 	/**
@@ -21,7 +22,7 @@ class StudentController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('admin.student.form');
 	}
 
 	/**
@@ -32,7 +33,19 @@ class StudentController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$input = Input::all();
+		//$user = new User;
+		$s = new Student;
+		$s->last_name = $input['last_name'];
+		$s->first_name = $input['first_name'];
+		$s->mi = $input['mi'];
+		$s->id_number = $input['id_number'];
+		$s->section = $input['section'];
+		//$user->username = $input['id_number'];
+		//$user->role = "STUDENT";
+		//$user->save();
+		$s->save();
+		return Redirect::action('StudentController@index');
 	}
 
 	/**
@@ -56,7 +69,8 @@ class StudentController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$stud = Student::find($id);
+		return View::make('admin.student.form',compact('stud'));
 	}
 
 	/**
@@ -68,7 +82,15 @@ class StudentController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$input = Input::all();
+		$student = Student::find($id);
+		$student->last_name = $input['last_name'];
+		$student->first_name = $input['first_name'];
+		$student->mi = $input['mi'];
+		$student->id_number = $input['id_number'];
+		$student->section = $input['section'];
+		$student->save();
+		return Redirect::action("StudentController@index");
 	}
 
 	/**
@@ -80,7 +102,8 @@ class StudentController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		Student::find($id)->delete();
+		return Redirect::action('StudentController@index');
 	}
 
 }
