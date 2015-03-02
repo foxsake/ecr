@@ -21,5 +21,11 @@ Route::group(array('before' => 'role'), function()
 	Route::resource('admin/class','ClassController');
 	Route::resource('admin/roster','RosterController');
 });
-Route::get('/', 'HomeController@index')->before('auth');
+
+Route::group(array('before' => 'auth'), function()
+{
+	Route::get('/', 'HomeController@index');//fix permission->before('auth')
+	Route::resource('requirement','RequirementController');
+	//Route::get('requirement/create/{id}', 'RequirementController@create');
+});
 Route::get('about', 'HomeController@about');

@@ -17,7 +17,9 @@ class HomeController extends BaseController {
 
 	public function index()
 	{
-		return View::make('welcome');
+		//return View::make('pages.welcome');
+		$leads = Classes::where('faculty_id_number',"=",Auth::user()->username)->get();
+		return View::make('faculty.index',compact('leads'));
 	}
 	public function about()
 	{
