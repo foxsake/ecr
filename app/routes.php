@@ -12,6 +12,7 @@
 */
 Route::get('login', 'SessionsController@create');
 Route::get('logout', 'SessionsController@destroy');
+
 Route::resource('sessions','SessionsController',['only' => ['store','create','destroy']]);
 Route::group(array('before' => 'role'), function()
 {
@@ -22,7 +23,7 @@ Route::group(array('before' => 'role'), function()
 	Route::resource('admin/roster','RosterController');
 });
 
-Route::group(array('before' => 'auth'), function()
+Route::group(array('before' => 'role2'), function()
 {
 	Route::get('/', 'HomeController@index');//fix permission->before('auth')
 	Route::resource('requirement','RequirementController');

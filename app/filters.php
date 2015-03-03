@@ -108,3 +108,15 @@ Route::filter('role', function()
         return Redirect::to('/');
     }
 });
+
+Route::filter('role2', function()
+{
+	if (Auth::guest())
+	{
+		return Redirect::guest('/login');
+	}
+    if(Auth::user()->role != 'FACULTY') 
+    {
+        return Redirect::to('/admin');
+    }
+});
