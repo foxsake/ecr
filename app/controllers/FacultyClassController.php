@@ -44,7 +44,21 @@ class FacultyClassController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		Session::put('classid', $id);
+		$cl = Classes::find($id);
+		if(empty($cl->requirement_id)){
+			//TODO
+		}else{
+			$leads = DB::table('roster')
+        	->join('student', function($join) use(&$cl)
+        	{
+            	$join->on('roster.id_number', '=', 'student.id_number')
+               		 ->where('roster.subject_code','=', $cl->subject_code);
+        	})
+        	->orderBy('last_name')
+        	->get();
+        	return View::make('faculty.class.show',compact('leads','cl'));
+    	}
 	}
 
 	/**

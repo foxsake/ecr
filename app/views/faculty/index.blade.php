@@ -4,7 +4,6 @@
 @stop
 @section('content')
     <h1>Manage Class</h1>
-    <div><a href="{{URL::to('admin/class/create')}}">Create Class</a></div>
     <div>
     <table class="table table-bordered table-hover">
     <thead>
@@ -31,7 +30,7 @@
                 <td>{{$lead->type}}</td>
                 <td>{{$lead->lec_subject_code}}</td>
                 <td>
-                    {{ Form::open(array('route' => array('requirement.index',$lead->id), 'method' => 'get')) }}
+                    {{ Form::open(array('route' => array('class.show',$lead->id), 'method' => 'get')) }}
                         <button type="submit" class="btn btn-success btn-xs">View</button>
                     {{ Form::close() }}
                 </td>

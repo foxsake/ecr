@@ -1,10 +1,10 @@
 <?php
 
-class CategoryController extends \BaseController {
+class ActivityController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
-	 * GET /category
+	 * GET /activity
 	 *
 	 * @return Response
 	 */
@@ -15,50 +15,50 @@ class CategoryController extends \BaseController {
 
 	/**
 	 * Show the form for creating a new resource.
-	 * GET /category/create
+	 * GET /activity/create
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-		//
+		$cl = Classes::find(Session::get('classid'));
+		$categ = Category::where('requirement_id','=',$cl->requirement_id)->orderBy('name')->lists('name','id');
+		return View::make('faculty.activity.form')->with('categ',$categ);
 	}
 
 	/**
 	 * Store a newly created resource in storage.
-	 * POST /category
+	 * POST /activity
 	 *
 	 * @return Response
 	 */
 	public function store()
 	{
+		$act = new Activity();
 		$input = Input::all();
-		$c = new Category();
-		$c->name = $input['name'];
-		$c->percentage = $input['percentage'];
-		$c->requirement_id = Session::get('requirementid');
-		$c->save();
-		return Redirect::intended('category/'.Session::get('requirementid'));
+		$act->name = $input['name'];
+		$act->max_score = $input["max_score"];
+		$act->term = $input['term'];
+		$act->category_id = $input['category_id'];
+		$act->save();
+		return Redirect::home('/');
 	}
 
 	/**
 	 * Display the specified resource.
-	 * GET /category/{id}
+	 * GET /activity/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function show($id)
 	{
-		//TODOo
-		$leads = Category::where('requirement_id','=',$id)->get();
-		Session::put('requirementid', $id);
-		return View::make('faculty.category.show',compact('leads'));
+		//
 	}
 
 	/**
 	 * Show the form for editing the specified resource.
-	 * GET /category/{id}/edit
+	 * GET /activity/{id}/edit
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -70,7 +70,7 @@ class CategoryController extends \BaseController {
 
 	/**
 	 * Update the specified resource in storage.
-	 * PUT /category/{id}
+	 * PUT /activity/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -82,7 +82,7 @@ class CategoryController extends \BaseController {
 
 	/**
 	 * Remove the specified resource from storage.
-	 * DELETE /category/{id}
+	 * DELETE /activity/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response

@@ -28,7 +28,8 @@ class RequirementController extends \BaseController {
 		//dd($req->id);//set class requirement id to this// open new view..
 		$c = Classes::find(Session::get('classid'));
 		$c->requirement_id = $req->id;
-		//return View::make('');
+		$c->save();
+		return Redirect::to('category/'.$req->id);
 	}
 
 	/**
@@ -62,9 +63,9 @@ class RequirementController extends \BaseController {
 			return View::make('faculty.requirement.show',compact('leads'));
 		}else{
 			$leads = DB::table('requirement')
-        	->leftJoin('category', function($join) use( &$cl)
+        	->rightJoin('category', function($join) use(&$cl)
         	{
-            	$join->on('category.requirement_id', '=', 'category.id')
+            	$join->on('category.requirement_id', '=', 'requirement.id')
                 	 ->where('requirement.id','=', $cl->requirement_id);
         	})
         	->orderBy('name')

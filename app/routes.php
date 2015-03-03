@@ -26,6 +26,9 @@ Route::group(array('before' => 'auth'), function()
 {
 	Route::get('/', 'HomeController@index');//fix permission->before('auth')
 	Route::resource('requirement','RequirementController');
+	Route::resource('category','CategoryController');
+	Route::resource('class','FacultyClassController');
+	Route::resource('activity','ActivityController');
 	//Route::get('requirement/create/{id}', 'RequirementController@create');
 });
 Route::get('about', 'HomeController@about');
