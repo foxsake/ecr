@@ -4,7 +4,6 @@
 @stop
 @section('content')
     <h1>Manage Class</h1>
-    <div>
     <table class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -30,12 +29,12 @@
                 <td>{{$lead->type}}</td>
                 <td>{{$lead->lec_subject_code}}</td>
                 <td>
-                    {{ Form::open(array('route' => array('class.show',$lead->id), 'method' => 'get')) }}
+                    {{ Form::open(array('route' => array('class.show',$lead->id), 'method' => 'get', 'class' => 'nospace')) }}
                         <button type="submit" class="btn btn-success btn-xs">View</button>
                     {{ Form::close() }}
                 </td>
                 <td>
-                   	{{ Form::open(array('route' => array('requirement.show',$lead->id), 'method' => 'get')) }}
+                   	{{ Form::open(array('route' => array('requirement.show',$lead->id), 'method' => 'get', 'class' => 'nospace')) }}
                        	<button type="submit" class="btn btn-warning btn-xs">Syllabus</button>
                    	{{ Form::close() }}
                 </td>
@@ -43,6 +42,4 @@
     	 @endforeach
     </tbody>
 	</table>
-	</div>
-    
 @stop

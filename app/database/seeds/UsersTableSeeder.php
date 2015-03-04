@@ -12,7 +12,9 @@ class UsersTableSeeder extends Seeder {
 		foreach(range(1, 10) as $index)
 		{
 			User::create([
-
+				'username' => 'admin',
+				'password' => Hash::make('admin'),
+				'role' => 'super-user'
 			]);
 		}
 	}

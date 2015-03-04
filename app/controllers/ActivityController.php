@@ -65,7 +65,8 @@ class ActivityController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$stud = Activity::find($id);
+		return View::make('faculty.activity.form',compact('stud'));
 	}
 
 	/**
@@ -77,7 +78,14 @@ class ActivityController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$input = Input::all();
+		$act = Activity::find($id);
+		$act->name = $input['name'];
+		$act->max_score = $input["max_score"];
+		$act->term = $input['term'];
+		$act->category_id = $input['category_id'];
+		$act->save();
+		return Redirect::home('/');
 	}
 
 	/**
@@ -89,7 +97,7 @@ class ActivityController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		Activity::find($id)->delete();
+		return Redirect::action('ActivityController@index');
 	}
-
 }

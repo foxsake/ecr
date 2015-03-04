@@ -55,6 +55,13 @@ class FacultyClassController extends \BaseController {
             	$join->on('roster.id_number', '=', 'student.id_number')
                		 ->where('roster.subject_code','=', $cl->subject_code);
         	})
+        	//for($i = 0; $i<DB::table('category')->where('requirement_id','=',$cl->requirement_id)->count();$i++){
+        		->join('category', function($join) use(&$cl)
+        			{
+            			$join->on('category.requirement_id', '=', $cl->requirement_id);
+               		 	->where('category.subject_code','=', $cl->subject_code);
+        			})
+        	//}
         	->orderBy('last_name')
         	->get();
         	return View::make('faculty.class.show',compact('leads','cl'));

@@ -4,7 +4,7 @@
     Login
 @stop
 @section('content')
-        <div class="form-horizontal">
+        <div class="container-center">
         <h1>Login</h1>
         @if ($errors->has())
             {{ Alert::error("Username or password incorrect.") }}
