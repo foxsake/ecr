@@ -8,34 +8,36 @@
     <div>
     <table class="table table-bordered table-hover">
     <thead>
+        <!--<tr>
+            <th class="tabletxt">Term</th>
+            <th colspan={{ '3' }} class="tabletxt">First Term</th>
+            <th colspan={{ '1' }} class="tabletxt">Second Term</th>
+            <th colspan={{ '1' }} class="tabletxt">Final Term</th>
+        </tr>-->
+    	<!--<tr>
+            <th class="tabletxt">Category</th>
+            @foreach($cats as $cat)
+            	<th colspan="3" class="tabletxt">{{ $cat->name }}</th>
+            @endforeach
+      
+        </tr>-->
         <tr>
-            <th>Student</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th>Students</th>
+            @foreach($actnames as $actname)
+            	<th>{{ $actname }}</th>
+            @endforeach
         </tr>
     </thead>
     <tbody>
     	@foreach($leads as $lead)
         	<tr>
-                <td>{{$lead->last_name.", ".$lead->first_name." ".$lead->mi."."}}</td>
-                <td></td>
-                <td></td>
-                <td>{{$lead->id_number}}</td>
-                <td></td>
-                <td>
-                    {{ Form::open(array('route' => array('admin.student.edit',$lead->id), 'method' => 'get')) }}
-                        <button type="submit" class="btn btn-warning btn-xs">Edit</button>
-                    {{ Form::close() }}
-                </td>
-                <td>
-                    {{ Form::open(array('route' => array('admin.student.destroy', $lead->id), 'method' => 'delete')) }}
-                        <button type="submit" class="btn btn-danger btn-xs">Delete</button>
-                    {{ Form::close() }}
-                </td>
+                <td>{{$lead->name}}</td>
+                {{-- */$n = 's1'; $i = 1;/* --}}
+                @foreach($actnames as $actname)
+                {{-- */$link = $n.'id'/* --}}
+                	<td>{{HTML::linkRoute('grade.edit', $lead->$n, $lead->$link)}}</a></td>
+                {{-- */$n = 's' . (++$i);/* --}}
+                @endforeach
             </tr>
     	 @endforeach
     </tbody>

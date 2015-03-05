@@ -30,6 +30,7 @@ Route::group(array('before' => 'role2'), function()
 	Route::resource('category','CategoryController');
 	Route::resource('class','FacultyClassController');
 	Route::resource('activity','ActivityController');
+	Route::resource('grade','GradeController');
 	//Route::get('requirement/create/{id}', 'RequirementController@create');
 });
 Route::get('about', 'HomeController@about');

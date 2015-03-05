@@ -1,9 +1,9 @@
 @extends('master')
 @section('title')
             @if(!isset($stud))
-                {{Add Activity}}
+                Add Activity
             @else
-                {{Edit Activity}}
+                Edit Activity
             @endif
 @stop
 @section('content')
@@ -26,6 +26,10 @@
         <div class="form-group">
             {{Form::label('max_score',"Over:")}}
             {{Form::text('max_score',Input::old('max_score'))}}
+        </div>
+        <div class="form-group">
+            {{Form::label('score',"Default Score:")}}
+            {{Form::text('score','0')}}
         </div>
         <div class="form-group">
             {{Form::label('term',"Term:")}}

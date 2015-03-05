@@ -41,7 +41,25 @@ class ActivityController extends \BaseController {
 		$act->term = $input['term'];
 		$act->category_id = $input['category_id'];
 		$act->save();
-		return Redirect::home('/');
+
+		$cl = Classes::find(Session::get('classid'));//refactor later!!!!
+		$studs = DB::table('roster')
+        	->join('student', function($join) use(&$cl)
+        	{
+            	$join->on('roster.id_number', '=', 'student.id_number')
+               		 ->where('roster.subject_code','=', $cl->subject_code);
+        	})
+        		->orderBy('last_name')
+        		->get();
+
+        foreach ($studs as $stud) {
+        	$gr = new Grade();
+        	$gr->id_number = $stud->id_number;
+        	$gr->act_id = $act->id;
+        	$gr->score = $input['score'];
+        	$gr->save();
+        }
+		return Redirect::intended('/');
 	}
 
 	/**

@@ -50,6 +50,10 @@
             {{Form::label('faculty_id_number',"Instructor: ")}}
             {{Form::text('faculty_id_number',Input::old('faculty_id_number'))}}
         </div>
+        <div class="form-group">
+            {{Form::label('requirement_id',"Requirement Id: ")}}
+            {{Form::text('requirement_id',Input::old('requirement_id'))}}
+        </div>
 
         <div class="form-group">
         @if(!isset($stud))

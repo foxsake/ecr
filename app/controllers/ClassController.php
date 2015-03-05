@@ -45,6 +45,7 @@ class ClassController extends \BaseController {
 		$s->type = $input['type'];
 		$s->lec_subject_code = $input['lec_subject_code'];
 		$s->faculty_id_number = $input['faculty_id_number'];
+		$s->requirement_id = $input['requirement_id'];
 		$s->save();
 		return Redirect::action('ClassController@index');
 	}
@@ -102,6 +103,7 @@ class ClassController extends \BaseController {
 		$s->type = $input['type'];
 		$s->lec_subject_code = $input['lec_subject_code'];
 		$s->faculty_id_number = $input['faculty_id_number'];
+		$s->requirement_id = $input['requirement_id'];
 		$s->save();
 		return Redirect::action('ClassController@index');
 	}

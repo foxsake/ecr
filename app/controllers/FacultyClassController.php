@@ -49,22 +49,54 @@ class FacultyClassController extends \BaseController {
 		if(empty($cl->requirement_id)){
 			//TODO
 		}else{
-			$leads = DB::table('roster')
+			/*$leads = DB::table('roster')
         	->join('student', function($join) use(&$cl)
         	{
             	$join->on('roster.id_number', '=', 'student.id_number')
                		 ->where('roster.subject_code','=', $cl->subject_code);
         	})
-        	//for($i = 0; $i<DB::table('category')->where('requirement_id','=',$cl->requirement_id)->count();$i++){
-        		->join('category', function($join) use(&$cl)
-        			{
-            			$join->on('category.requirement_id', '=', $cl->requirement_id);
-               		 	->where('category.subject_code','=', $cl->subject_code);
-        			})
-        	//}
+
+        	->join('grade as g1', function($join) use(&$cl)
+        	{
+            	$join->on('g1.id_number', '=', 'student.id_number')
+               		 ->where('g1.act_id','=', '4');
+        	})
+        	->join('grade as g2', function($join) use(&$cl)
+        	{
+            	$join->on('g2.id_number', '=', 'student.id_number')
+               		 ->where('g2.act_id','=', '5');
+        	})
+        	->join('grade as g3', function($join) use(&$cl)
+        	{
+            	$join->on('g3.id_number', '=', 'student.id_number')
+               		 ->where('g3.act_id','=', '6');
+        	})
+
+        	->select('g3.score as s3', 'g2.score as s2', 'g1.score as s1', 'last_name', 'first_name', 'mi')
         	->orderBy('last_name')
-        	->get();
-        	return View::make('faculty.class.show',compact('leads','cl'));
+        	->get();*/
+        	$count = 1;
+        	$sqls = 'select CONCAT(last_name,", ", first_name," ", mi,".") as name';
+        	$sqlj = '';
+        	$sqln = ' from roster inner join student on roster.id_number = student.id_number and roster.subject_code = '.$cl->subject_code.' ';
+        	$cats = Category::where('requirement_id','=', $cl->requirement_id)->orderBy('name')->get();
+        	$actnames = array();
+
+        	foreach ($cats as $cat) {
+        		$acts = Activity::where('category_id','=',$cat->id)->orderBy('term')->get();
+        		foreach ($acts as $act) {
+        			$sqlj .= ' inner join grade as g'.$count.' on g'.$count.'.id_number = student.id_number and g'.$count.'.act_id = '.$act->id;
+        			$sqls .= ', g'.$count.'.score as s'.$count.', g'.$count.'.id as s'.$count.'id';
+        			array_push($actnames, $act->name);
+        			$count++;
+        		}
+        	}
+        	$sqls = $sqls.$sqln.$sqlj;
+
+        	$leads = DB::select($sqls.' order by last_name asc');
+        	//dd($leads);
+        	//TODO
+        	return View::make('faculty.class.show',compact('leads','cl','cats','actnames'));//bilang ng activities
     	}
 	}
 
