@@ -3,7 +3,8 @@
     Students
 @stop
 @section('content')
-    <h1>{{$cl->subject_code." - ".$cl->catalogue_number}}</h1>
+    <h1>{{$cl->catalogue_number}}</h1>
+    <h3>{{ " Day: ".$cl->day." - Time: ".$cl->time." - Room: ".$cl->room }}</h3>
     <div><a href="{{URL::to('activity/create')}}">Add Activity</a></div>
     <div>
     <table class="table table-bordered table-hover">
