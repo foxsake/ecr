@@ -1,6 +1,6 @@
 @extends('master')
 @section('title')
-    Students
+    Gradebook
 @stop
 @section('content')
     <h1>{{$cl->catalogue_number}}</h1>
@@ -24,8 +24,16 @@
         </tr>-->
         <tr>
             <th>Students</th>
+            <th>Raw Score</th>
             @foreach($actnames as $actname)
-            	<th>{{ $actname }}</th>
+            	<th>{{ $actname['name']." (".$actname['max'].")" }}</th>
+            @endforeach
+        </tr>
+        <tr>
+            <th>Date</th>
+            <td></td>
+            @foreach($actnames as $actname)
+                <td>{{ $actname['date'] }}</td>
             @endforeach
         </tr>
     </thead>
@@ -33,6 +41,7 @@
     	@foreach($leads as $lead)
         	<tr>
                 <td>{{$lead->name}}</td>
+                <td>{{$lead->subj_grade}}</td>
                 {{-- */$n = 's1'; $i = 1;/* --}}
                 @foreach($actnames as $actname)
                 {{-- */$link = $n.'id'/* --}}

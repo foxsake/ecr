@@ -65,9 +65,10 @@ class RequirementController extends \BaseController {
 			$leads = DB::table('requirement')
         	->rightJoin('category', function($join) use(&$cl)
         	{
-            	$join->on('category.requirement_id', '=', 'requirement.id')
-                	 ->where('requirement.id','=', $cl->requirement_id);
+            	$join->on('category.requirement_id', '=', 'requirement.id');
+                	 //to add something?
         	})
+        	->where('requirement.id','=', $cl->requirement_id)
         	->orderBy('name')
         	->get();
         	return View::make('faculty.requirement.index',compact('leads'));

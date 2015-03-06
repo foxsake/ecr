@@ -40,6 +40,7 @@ class ActivityController extends \BaseController {
 		$act->max_score = $input["max_score"];
 		$act->term = $input['term'];
 		$act->category_id = $input['category_id'];
+		$act->date = $input['date'];
 		$act->save();
 
 		$cl = Classes::find(Session::get('classid'));//refactor later!!!!

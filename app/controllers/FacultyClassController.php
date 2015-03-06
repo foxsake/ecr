@@ -76,7 +76,7 @@ class FacultyClassController extends \BaseController {
         	->orderBy('last_name')
         	->get();*/
         	$count = 1;
-        	$sqls = 'select CONCAT(last_name,", ", first_name," ", mi,".") as name';
+        	$sqls = 'select CONCAT(last_name,", ", first_name," ", mi,".") as name, subj_grade';
         	$sqlj = '';
         	$sqln = ' from roster inner join student on roster.id_number = student.id_number and roster.subject_code = '.$cl->subject_code.' ';
         	$cats = Category::where('requirement_id','=', $cl->requirement_id)->orderBy('name')->get();
@@ -87,7 +87,7 @@ class FacultyClassController extends \BaseController {
         		foreach ($acts as $act) {
         			$sqlj .= ' inner join grade as g'.$count.' on g'.$count.'.id_number = student.id_number and g'.$count.'.act_id = '.$act->id;
         			$sqls .= ', g'.$count.'.score as s'.$count.', g'.$count.'.id as s'.$count.'id';
-        			array_push($actnames, $act->name);
+        			array_push($actnames, array('name' => $act->name, 'max' => $act->max_score,'date' => $act->date));
         			$count++;
         		}
         	}

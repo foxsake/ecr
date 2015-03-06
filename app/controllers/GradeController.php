@@ -59,7 +59,8 @@ class GradeController extends \BaseController {
 		$stud = Grade::find($id);
 		$st = Student::where('id_number','=',$stud->id_number)->first();
 		$act = Activity::find($stud->act_id);
-		return View::make('faculty.grade.form',compact('stud','st','act'));
+		$cl = Classes::find(Session::get('classid'));
+		return View::make('faculty.grade.form',compact('stud','st','act','cl'));
 	}
 
 	/**
@@ -75,6 +76,16 @@ class GradeController extends \BaseController {
 		$input = Input::all();
 		$stud->score = $input['score'];
 		$stud->save();
+
+		$cl = Classes::find(Session::get('classid'));
+
+		$ros = Roster::where('id_number','=',$stud->id_number)
+					->where('subject_code','=',$cl->subject_code)
+					->first();
+
+		$ros->subj_grade = Grader::computeRaw($stud);
+		$ros->save();
+		//dd($ros->id." ".Session::get('classid')." ".$stud->id." ".$cl->subject_code);
 		return Redirect::action('FacultyClassController@show',Session::get('classid'));
 	}
 

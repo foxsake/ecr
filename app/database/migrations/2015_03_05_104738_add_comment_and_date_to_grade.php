@@ -7,7 +7,7 @@ class AddCommentAndDateToGrade extends Migration {
 
 	/**
 	 * Run the migrations.
-	 *
+	 *disregard the date!
 	 * @return void
 	 */
 	public function up()
@@ -15,7 +15,7 @@ class AddCommentAndDateToGrade extends Migration {
 		Schema::table('grade', function(Blueprint $table)
 		{
 			$table->string('comment');
-			$table->date('date');
+			//$table->date('date');
 		});
 	}
 
@@ -29,7 +29,7 @@ class AddCommentAndDateToGrade extends Migration {
 		Schema::table('grade', function(Blueprint $table)
 		{
 			$table->dropColumn('comment');
-			$table->dropColumn('date');
+			//$table->dropColumn('date');
 		});
 	}
 
