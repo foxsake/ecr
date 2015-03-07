@@ -18,27 +18,27 @@
         @endif
         <div class="form-group">
             {{Form::label('id_number',"ID Number:")}}
-            {{Form::text('id_number',Input::old('id_number'))}}
+            {{Form::text('id_number',Input::old('id_number'),['class'=>'form-control'])}}
         </div>
         <div class="form-group">
             {{Form::label('last_name',"Lastname:")}}
-            {{Form::text('last_name',Input::old('last_name'))}}
+            {{Form::text('last_name',Input::old('last_name'),['class'=>'form-control'])}}
         </div>
         <div class="form-group">
             {{Form::label('first_name',"Firstname:")}}
-            {{Form::text('first_name',Input::old('first_name'))}}
+            {{Form::text('first_name',Input::old('first_name'),['class'=>'form-control'])}}
         </div>
         <div class="form-group">
             {{Form::label('mi',"Middle Initial:")}}
-            {{Form::text('mi',Input::old('mi'))}}
+            {{Form::text('mi',Input::old('mi'),['class'=>'form-control'])}}
         </div>
         <div class="form-group">
             {{Form::label('password',"Password:")}}
-            {{Form::password('password')}}
+            {{Form::password('password',['class'=>'form-control'])}}
         </div>
         <div class="form-group">
             {{Form::label('password2',"Retype Password:")}}
-            {{Form::password('password2')}}
+            {{Form::password('password2',['class'=>'form-control'])}}
         </div>
         <div class="form-group">
         @if(!isset($fac))

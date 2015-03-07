@@ -20,39 +20,39 @@
 
         <div class="form-group">
             {{Form::label('subject_code',"Subject Code:")}}
-            {{Form::text('subject_code',Input::old('subject_code'))}}
+            {{Form::text('subject_code',Input::old('subject_code'),['class'=>'form-control'])}}
         </div>
         <div class="form-group">
             {{Form::label('catalogue_number',"Catalogue Number:")}}
-            {{Form::text('catalogue_number',Input::old('catalogue_number'))}}
+            {{Form::text('catalogue_number',Input::old('catalogue_number'),['class'=>'form-control'])}}
         </div>
         <div class="form-group">
             {{Form::label('room',"Room:")}}
-            {{Form::text('room',Input::old('room'))}}
+            {{Form::text('room',Input::old('room'),['class'=>'form-control'])}}
         </div>
         <div class="form-group">
             {{Form::label('time',"Time:")}}
-            {{Form::text('time',Input::old('time'))}}
+            {{Form::text('time',Input::old('time'),['class'=>'form-control'])}}
         </div>
         <div class="form-group">
             {{Form::label('day',"Day:")}}
-            {{Form::text('day',Input::old('day'))}}
+            {{Form::text('day',Input::old('day'),['class'=>'form-control'])}}
         </div>
         <div class="form-group">
             {{Form::label('type',"Type: ")}}
-            {{Form::text('type',Input::old('type'))}}
+            {{Form::text('type',Input::old('type'),['class'=>'form-control'])}}
         </div>
         <div class="form-group">
             {{Form::label('lec_subject_code',"Lecture Subject Code: ")}}
-            {{Form::text('lec_subject_code',Input::old('lec_subject_code'))}}
+            {{Form::text('lec_subject_code',Input::old('lec_subject_code'),['class'=>'form-control'])}}
         </div>
         <div class="form-group">
             {{Form::label('faculty_id_number',"Instructor: ")}}
-            {{Form::text('faculty_id_number',Input::old('faculty_id_number'))}}
+            {{Form::text('faculty_id_number',Input::old('faculty_id_number'),['class'=>'form-control'])}}
         </div>
         <div class="form-group">
             {{Form::label('requirement_id',"Requirement Id: ")}}
-            {{Form::text('requirement_id',Input::old('requirement_id'))}}
+            {{Form::text('requirement_id',Input::old('requirement_id'),['class'=>'form-control'])}}
         </div>
 
         <div class="form-group">

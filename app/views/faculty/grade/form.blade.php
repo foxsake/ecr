@@ -20,7 +20,7 @@
         </div>
         <div class="form-group">
             {{Form::label('comment',"Comment:")}}
-            {{Form::text('comment', Input::old('comment'), ['class'=>'form-control','placeholder' => 'Comment'])}}
+            {{Form::textarea('comment', Input::old('comment'), ['class'=>'form-control','placeholder' => 'Comment','rows' => '4'])}}
         </div>
         <div class="form-group">
             {{Form::submit('Save',array('class'=>'btn btn-default'))}}

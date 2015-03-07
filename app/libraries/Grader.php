@@ -32,4 +32,9 @@ class Grader{
 		return $total;
 	}
 
+	public static function computeWithLab($g){
+		//$lec = computeRaw($g);
+		//$lec = $lec * 0.67;
+		//$lab *= 0.33;
+	}
 }

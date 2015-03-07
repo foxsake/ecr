@@ -75,6 +75,7 @@ class GradeController extends \BaseController {
 		$stud = Grade::find($id);
 		$input = Input::all();
 		$stud->score = $input['score'];
+		$stud->comment = $input['comment'];
 		$stud->save();
 
 		$cl = Classes::find(Session::get('classid'));

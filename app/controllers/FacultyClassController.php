@@ -47,7 +47,7 @@ class FacultyClassController extends \BaseController {
 		Session::put('classid', $id);
 		$cl = Classes::find($id);
 		if(empty($cl->requirement_id)){
-			//TODO
+			//todo
 		}else{
 			/*$leads = DB::table('roster')
         	->join('student', function($join) use(&$cl)
@@ -76,7 +76,7 @@ class FacultyClassController extends \BaseController {
         	->orderBy('last_name')
         	->get();*/
         	$count = 1;
-        	$sqls = 'select CONCAT(last_name,", ", first_name," ", mi,".") as name, subj_grade';
+        	$sqls = 'select CONCAT(last_name,", ", first_name," ", mi,".") as name, roster.subj_grade';
         	$sqlj = '';
         	$sqln = ' from roster inner join student on roster.id_number = student.id_number and roster.subject_code = '.$cl->subject_code.' ';
         	$cats = Category::where('requirement_id','=', $cl->requirement_id)->orderBy('name')->get();
@@ -91,10 +91,17 @@ class FacultyClassController extends \BaseController {
         			$count++;
         		}
         	}
-        	$sqls = $sqls.$sqln.$sqlj;
+        	//New
+        	if($cl->type = 'LEC'){
+        		$sqlexx = ', labs.subj_grade as lab_grade';
+        		$sqlex = ' left join roster as labs inner join class as cls on cls.subject_code = labs.subject_code on labs.id_number = roster.id_number and cls.lec_subject_code = '.$cl->subject_code.' ';
+        		$sqlj .= $sqlex;
+        		$sqls .= $sqlexx;
+        	}
 
+        	$sqls = $sqls.$sqln.$sqlj;
+        	//dd($sqls.' order by last_name asc');
         	$leads = DB::select($sqls.' order by last_name asc');
-        	//dd($leads);
         	//TODO
         	return View::make('faculty.class.show',compact('leads','cl','cats','actnames'));//bilang ng activities
     	}

@@ -20,19 +20,15 @@
 
         <div class="form-group">
             {{Form::label('subject_code',"Subject Code:")}}
-            {{Form::text('subject_code',Input::old('subject_code'))}}
+            {{Form::text('subject_code',Input::old('subject_code'),['class'=>'form-control'])}}
         </div>
         <div class="form-group">
             {{Form::label('id_number',"ID Number:")}}
-            {{Form::text('id_number',Input::old('id_number'))}}
+            {{Form::text('id_number',Input::old('id_number'),['class'=>'form-control'])}}
         </div>
 
         <div class="form-group">
-        @if(!isset($stud))
-            {{Form::submit('Create Account',array('class'=>'btn btn-default'))}}
-        @else
-            {{Form::submit('Edit Account',array('class'=>'btn btn-default'))}}
-        @endif
+            {{Form::submit('Save',array('class'=>'btn btn-default'))}}
         </div>
         {{Form::close()}}
         </div>

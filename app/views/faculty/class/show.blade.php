@@ -28,6 +28,9 @@
             @foreach($actnames as $actname)
             	<th>{{ $actname['name']." (".$actname['max'].")" }}</th>
             @endforeach
+            @if(isset($leads[0]->lab_grade))
+            <th>Lab Grade</th>
+            @endif
         </tr>
         <tr>
             <th>Date</th>
@@ -35,6 +38,9 @@
             @foreach($actnames as $actname)
                 <td>{{ $actname['date'] }}</td>
             @endforeach
+            @if(isset($leads[0]->lab_grade))
+                <th></th>
+            @endif
         </tr>
     </thead>
     <tbody>
@@ -48,6 +54,9 @@
                 	<td>{{HTML::linkRoute('grade.edit', $lead->$n, $lead->$link)}}</a></td>
                 {{-- */$n = 's' . (++$i);/* --}}
                 @endforeach
+                @if(isset($lead->lab_grade))
+                    <td>{{ $lead->lab_grade }}</td>
+                @endif
             </tr>
     	 @endforeach
     </tbody>
