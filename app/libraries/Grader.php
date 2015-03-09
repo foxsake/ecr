@@ -1,6 +1,7 @@
 <?php
 
 class Grader{
+	
 	/*comput the grade.*/
 	public static function computeRaw($g){
 		$grade = $g;
