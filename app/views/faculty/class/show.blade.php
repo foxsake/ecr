@@ -7,7 +7,7 @@
     <h3>{{ " Day: ".$cl->day." - Time: ".$cl->time." - Room: ".$cl->room }}</h3>
     <div><a href="{{URL::to('activity/create')}}">Add Activity</a></div>
     <div>
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover table-striped table-condensed">
     <thead>
         <!--<tr>
             <th class="tabletxt">Term</th>

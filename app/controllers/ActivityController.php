@@ -59,6 +59,7 @@ class ActivityController extends \BaseController {
         	$gr->act_id = $act->id;
         	$gr->score = $input['score'];
         	$gr->save();
+        	Grader::computeRaw($gr);
         }
 		return Redirect::intended('/');
 	}

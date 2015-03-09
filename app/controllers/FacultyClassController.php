@@ -91,13 +91,11 @@ class FacultyClassController extends \BaseController {
         			$count++;
         		}
         	}
-        	//New
-        	if($cl->type = 'LEC'){
+        	//query for lab grade..
         		$sqlexx = ', labs.subj_grade as lab_grade';
         		$sqlex = ' left join roster as labs inner join class as cls on cls.subject_code = labs.subject_code on labs.id_number = roster.id_number and cls.lec_subject_code = '.$cl->subject_code.' ';
         		$sqlj .= $sqlex;
         		$sqls .= $sqlexx;
-        	}
 
         	$sqls = $sqls.$sqln.$sqlj;
         	//dd($sqls.' order by last_name asc');

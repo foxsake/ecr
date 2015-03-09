@@ -8,7 +8,7 @@
             @endif
 @stop
 @section('addcss')
-    {{ HTML::style('css/datetimepicker.min.css') }}
+    {{ HTML::style('css/bootstrap-datetimepicker.min.css') }}
 @stop
 @section('content')
         

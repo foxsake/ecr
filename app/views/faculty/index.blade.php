@@ -13,7 +13,6 @@
             <th>Time</th>
             <th>Day</th>
             <th>Type</th>
-            <th>Lec Subject Code</th>
             <th></th>
             <th></th>
         </tr>
@@ -27,7 +26,6 @@
                 <td>{{$lead->time}}</td>
                 <td>{{$lead->day}}</td>
                 <td>{{$lead->type}}</td>
-                <td>{{$lead->lec_subject_code}}</td>
                 <td>
                     {{ Form::open(array('route' => array('class.show',$lead->id), 'method' => 'get', 'class' => 'nospace')) }}
                         <button type="submit" class="btn btn-success btn-xs">View</button>

@@ -84,7 +84,9 @@ class GradeController extends \BaseController {
 					->where('subject_code','=',$cl->subject_code)
 					->first();
 
-		$ros->subj_grade = Grader::computeRaw($stud);
+		//$ros->subj_grade = Grader::computeRaw($stud);
+		$ros->subj_grade = Grader::computeWithLab($stud,Session::get('classid'));
+
 		$ros->save();
 		//dd($ros->id." ".Session::get('classid')." ".$stud->id." ".$cl->subject_code);
 		return Redirect::action('FacultyClassController@show',Session::get('classid'));
