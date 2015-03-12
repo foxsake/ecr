@@ -8,8 +8,7 @@ class Grader{
 		$activity = Activity::find($grade->act_id);
 		$category = Category::find($activity->category_id);
 		$reqid = $category->requirement_id;
-		$print = '';
-		$print2 = '';
+
 		//grading vars
 		$total = 0.00;
 
@@ -32,23 +31,35 @@ class Grader{
 				$comp = ($sum / $max) * 100.00;
 				$total += $comp * ($categ->percentage/100.00);
 			}
-			
 		}
 		return $total;
 	}
 
+	//ILOVEYOU MOST SWEETY!
+	//think of a better algorithim. but this will do for now;)
 	public static function computeWithLab($g,$cl){
 		$lec = Grader::computeRaw($g);
-
 		$cla = Classes::find($cl);
-		$cla = Classes::join('roster','roster.subject_code','=','class.subject_code')
-		->where('lec_subject_code','=',$cla->subject_code)
-		->where('roster.id_number','=',$g->id_number)->first();
-		//$ros = Roster::where('subject_code','=',$cla->subject_code)->where('id_number','=',)->first();
-		$lab = $cla->grade;
-		$lec *= 0.67;
-		$lab *= 0.33;
-		dd($cla->grade);
+		$labcl = Classes::where('lec_subject_code','=',$cla->subject_code)->get();
+		if($labcl->isEmpty()){
+			return $lec;
+		}else{
+			$sql = "select * from roster where roster.id_number = '" . $g->id_number ."' and (";
+			$cc = 0;
+			foreach ($labcl as $labo) {
+				if($cc > 0)
+					$sql .= 'or';
+				$sql .= " roster.subject_code = '".$labo->subject_code."' ";
+				$cc++;
+			}
+			$sql .= ')';
+			$laborat = DB::select($sql);
+			$laborat = $laborat[0];
+			$lab = $laborat->subj_grade;
+			//percentage
+			$lec *= 0.67;
+			$lab *= 0.33;
+		}
 		return $lab + $lec;
 	}
 }

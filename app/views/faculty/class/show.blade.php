@@ -26,7 +26,7 @@
             <th>Students</th>
             <th>Raw Score</th>
             @foreach($actnames as $actname)
-            	<th>{{ $actname['name']." (".$actname['max'].")" }}</th>
+            	<th>{{ HTML::linkRoute('activity.show', $actname['name']." (".$actname['max'].")", $actname['id']) }}</th><!--dito!!-->
             @endforeach
             @if(isset($leads[0]->lab_grade))
             <th>Lab Grade</th>
@@ -51,7 +51,7 @@
                 {{-- */$n = 's1'; $i = 1;/* --}}
                 @foreach($actnames as $actname)
                 {{-- */$link = $n.'id'/* --}}
-                	<td>{{HTML::linkRoute('grade.edit', $lead->$n, $lead->$link)}}</a></td>
+                	<td>{{HTML::linkRoute('grade.edit', $lead->$n, $lead->$link)}}</td>
                 {{-- */$n = 's' . (++$i);/* --}}
                 @endforeach
                 @if(isset($lead->lab_grade))

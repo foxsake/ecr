@@ -24,7 +24,8 @@ class ClassController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('admin.class.form');
+		$fac = Faculty::select(DB::raw('CONCAT(last_name,", ", first_name ," ", mi ,".") as name'),'id_number')->orderBy('last_name')->lists('name','id_number');
+		return View::make('admin.class.form',compact('fac'));
 	}
 
 	/**
@@ -81,7 +82,9 @@ class ClassController extends \BaseController {
 	public function edit($id)
 	{
 		$stud = Classes::find($id);
-		return View::make('admin.class.form',compact('stud'));
+		//$fac = DB::select('select CONCAT(last_name,", ", first_name ," ", mi ,".") as name, id_number from faculty');
+		$fac = Faculty::select(DB::raw('CONCAT(last_name,", ", first_name ," ", mi ,".") as name'),'id_number')->orderBy('last_name')->lists('name','id_number');
+		return View::make('admin.class.form',compact('stud','fac'));
 	}
 
 	/**

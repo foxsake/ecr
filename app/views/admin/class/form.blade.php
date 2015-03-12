@@ -46,10 +46,12 @@
             {{Form::label('lec_subject_code',"Lecture Subject Code: ")}}
             {{Form::text('lec_subject_code',Input::old('lec_subject_code'),['class'=>'form-control'])}}
         </div>
+
         <div class="form-group">
-            {{Form::label('faculty_id_number',"Instructor: ")}}
-            {{Form::text('faculty_id_number',Input::old('faculty_id_number'),['class'=>'form-control'])}}
+            {{Form::label('faculty_id_number',"Faculty:")}}
+            {{Form::select('faculty_id_number', $fac, Input::old('faculty_id_number'),['class'=>'form-control'])}}
         </div>
+
         <div class="form-group">
             {{Form::label('requirement_id',"Requirement Id: ")}}
             {{Form::text('requirement_id',Input::old('requirement_id'),['class'=>'form-control'])}}

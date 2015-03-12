@@ -63,7 +63,7 @@ class RequirementController extends \BaseController {
 			return View::make('faculty.requirement.show',compact('leads'));
 		}else{
 			$leads = DB::table('requirement')
-        	->rightJoin('category', function($join) use(&$cl)
+        	->join('category', function($join) use(&$cl)
         	{
             	$join->on('category.requirement_id', '=', 'requirement.id');
                 	 //to add something?

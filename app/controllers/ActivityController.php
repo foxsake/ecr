@@ -73,7 +73,10 @@ class ActivityController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$cl = Classes::find(Session::get('classid'));
+		$act = Activity::find($id);
+		$categ = Category::where('requirement_id','=',$cl->requirement_id)->orderBy('name')->lists('name','id');
+		return View::make('faculty.activity.show',compact('act','categ'));
 	}
 
 	/**
@@ -104,8 +107,9 @@ class ActivityController extends \BaseController {
 		$act->max_score = $input["max_score"];
 		$act->term = $input['term'];
 		$act->category_id = $input['category_id'];
+		$act->date = $input['date'];
 		$act->save();
-		return Redirect::home('/');
+		return Redirect::intended('/');
 	}
 
 	/**

@@ -22,16 +22,26 @@ class SessionsController extends \BaseController {
 	public function store()
 	{
 		$input = Input::all();
-		$attempt = Auth::attempt([
+		$validator = Validator::make($input,array(
+				'username' => 'required',
+				'password' => 'required'
+			));
+		if($validator->fails()){
+			return Redirect::route('login')->withErrors($validator)->withInput();
+		}else{
+			$attempt = Auth::attempt([
 		    'username'=>$input['username'],
 		    'password'=>$input['password']
-		]);
-		if($attempt)
-		    if(strcmp(Auth::user()->role,"super-user")==0) return Redirect::action('SuperUserController@index');
-		    else return Redirect::intended('/');
-		else
-			return Redirect::intended('/login');
-		//dd('problem');
+			]);
+			if($attempt){
+		    	if(strcmp(Auth::user()->role,"super-user")==0) return Redirect::action('SuperUserController@index');
+		    	else return Redirect::intended('/');
+			}else{
+				$warn = 'ID Number/Password wrong, or account does not exist.';
+				return Redirect::route('login')->with('warn' , $warn)->withInput();
+			}
+		}
+		return Redirect::route('login')->with('global','There was a problem logging you in.')->withInput();
 	}
 
 	/**
@@ -46,5 +56,4 @@ class SessionsController extends \BaseController {
 		Auth::logout();
 		return Redirect::intended('/');
 	}
-
 }

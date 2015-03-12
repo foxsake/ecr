@@ -87,7 +87,7 @@ class FacultyClassController extends \BaseController {
         		foreach ($acts as $act) {
         			$sqlj .= ' inner join grade as g'.$count.' on g'.$count.'.id_number = student.id_number and g'.$count.'.act_id = '.$act->id;
         			$sqls .= ', g'.$count.'.score as s'.$count.', g'.$count.'.id as s'.$count.'id';
-        			array_push($actnames, array('name' => $act->name, 'max' => $act->max_score,'date' => $act->date));
+        			array_push($actnames, array('name' => $act->name, 'max' => $act->max_score,'date' => $act->date,'id' => $act->id));
         			$count++;
         		}
         	}

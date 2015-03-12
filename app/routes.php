@@ -10,10 +10,31 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-Route::get('login', 'SessionsController@create');
-Route::get('logout', 'SessionsController@destroy');
 
-Route::resource('sessions','SessionsController',['only' => ['store','create','destroy']]);
+/*guest group*/
+Route::group(array('before' => 'guest'), function(){
+	/*csrf protection group*/
+	Route::group(array('before' => 'csrf'), function(){
+		Route::resource('sessions','SessionsController',['only' => ['store','create','destroy']]);
+		/*post*/
+		Route::post('signin', array(
+			'as' => 'signin',
+			'uses' => 'SessionsController@store'
+		));
+	});	
+		Route::get('login', array(
+			'as' => 'login',
+			'uses' => 'SessionsController@create'
+		));
+});
+
+Route::group(array('before' => 'auth'), function(){
+		Route::get('logout', array(
+			'as' => 'logout',
+			'uses' => 'SessionsController@destroy'
+		));
+});
+
 Route::group(array('before' => 'role'), function()
 {
 	Route::resource('admin','SuperUserController',['only' => ['store','create','destroy','index']]);
@@ -25,12 +46,14 @@ Route::group(array('before' => 'role'), function()
 
 Route::group(array('before' => 'role2'), function()
 {
-	Route::get('/', 'HomeController@index');//fix permission->before('auth')
+	Route::get('/', array(
+		'as' => 'home',
+		'uses' => 'HomeController@index'
+	));
 	Route::resource('requirement','RequirementController');
 	Route::resource('category','CategoryController');
 	Route::resource('class','FacultyClassController');
 	Route::resource('activity','ActivityController');
 	Route::resource('grade','GradeController');
-	//Route::get('requirement/create/{id}', 'RequirementController@create');
 });
-Route::get('about', 'HomeController@about');
+//Route::get('about', 'HomeController@about');
