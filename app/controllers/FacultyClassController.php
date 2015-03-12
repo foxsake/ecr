@@ -45,9 +45,10 @@ class FacultyClassController extends \BaseController {
 	public function show($id)
 	{
 		Session::put('classid', $id);
-		$cl = Classes::find($id);
-		if(empty($cl->requirement_id)){
-			//todo
+		//$cl = Classes::find($id);
+		$reqs = Requirement::join('category','category.id','=','requirement.category_id')->where('requirement.class_id','=',$id)->select('name','percentage')->get();
+		if($reqs->isEmpty(){
+			return Redirect::route('requirement.show',Session::get('classid'));
 		}else{
 			/*$leads = DB::table('roster')
         	->join('student', function($join) use(&$cl)

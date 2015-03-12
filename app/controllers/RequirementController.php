@@ -40,7 +40,13 @@ class RequirementController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$input = Input::all();
+		$req = new Requirement();
+		$req->class_id = Session::get('classid');
+		$req->percentage = $input['percentage'];
+		$req->category_id = $input['category_id'];
+		$req->save();
+		return Redirect::route('requirement.show',Session::get('classid'));
 	}
 
 	/**
@@ -53,26 +59,14 @@ class RequirementController extends \BaseController {
 	public function show($id)
 	{
 		Session::put('classid', $id);
-		$cl = Classes::find($id);
-		if(empty($cl->requirement_id)){
-			$leads = DB::table('class')
-        	->join('requirement', 'class.requirement_id', '=', 'requirement.id')
-        	->where('class.catalogue_number','=',$cl->catalogue_number)
-        	->orderBy('class.catalogue_number')
-        	->get();
-			return View::make('faculty.requirement.show',compact('leads'));
+		$thesum = Requirement::join('category','category.id','=','requirement.category_id')->where('requirement.class_id','=',$id)->sum('percentage');
+		$leads = Requirement::join('category','category.id','=','requirement.category_id')->where('requirement.class_id','=',$id)->select('name','percentage')->get();
+		if(!$leads->isEmpty() && $thesum == 100){
+			return View::make('faculty.requirement.index',compact('leads'));
 		}else{
-			$leads = DB::table('requirement')
-        	->join('category', function($join) use(&$cl)
-        	{
-            	$join->on('category.requirement_id', '=', 'requirement.id');
-                	 //to add something?
-        	})
-        	->where('requirement.id','=', $cl->requirement_id)
-        	->orderBy('name')
-        	->get();
-        	return View::make('faculty.requirement.index',compact('leads'));
-    	}
+			$categ =  Category::orderBy('name')->lists('name','id');
+			return View::make('faculty.requirement.show',compact('leads','categ'));
+		}
 	}
 
 	/**
@@ -108,7 +102,8 @@ class RequirementController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		Requirement::find($id)->delete();
+		return Redirect::route('requirement.show',Session::get('classid'));
 	}
 
 }

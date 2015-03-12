@@ -21,7 +21,7 @@ class CategoryController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('faculty.category.form');
 	}
 
 	/**
@@ -35,10 +35,8 @@ class CategoryController extends \BaseController {
 		$input = Input::all();
 		$c = new Category();
 		$c->name = $input['name'];
-		$c->percentage = $input['percentage'];
-		$c->requirement_id = Session::get('requirementid');
 		$c->save();
-		return Redirect::intended('category/'.Session::get('requirementid'));
+		return Redirect::route('requirement.show',Session::get('classid'));
 	}
 
 	/**
