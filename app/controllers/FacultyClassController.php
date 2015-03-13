@@ -45,9 +45,9 @@ class FacultyClassController extends \BaseController {
 	public function show($id)
 	{
 		Session::put('classid', $id);
-		//$cl = Classes::find($id);
+		$cl = Classes::find($id);
 		$reqs = Requirement::join('category','category.id','=','requirement.category_id')->where('requirement.class_id','=',$id)->select('name','percentage')->get();
-		if($reqs->isEmpty(){
+		if($reqs->isEmpty()){
 			return Redirect::route('requirement.show',Session::get('classid'));
 		}else{
 			/*$leads = DB::table('roster')
@@ -80,11 +80,15 @@ class FacultyClassController extends \BaseController {
         	$sqls = 'select CONCAT(last_name,", ", first_name," ", mi,".") as name, roster.subj_grade';
         	$sqlj = '';
         	$sqln = ' from roster inner join student on roster.id_number = student.id_number and roster.subject_code = '.$cl->subject_code.' ';
-        	$cats = Category::where('requirement_id','=', $cl->requirement_id)->orderBy('name')->get();
+        	//$cats = Category::where('requirement_id','=', $cl->requirement_id)->orderBy('name')->get();
+        	$cats = Requirement::join('category','category.id','=','requirement.category_id')
+			->where('requirement.class_id','=',Session::get('classid'))
+			->orderBy('category.name')->get();
+
         	$actnames = array();
 
         	foreach ($cats as $cat) {
-        		$acts = Activity::where('category_id','=',$cat->id)->orderBy('term')->get();
+        		$acts = Activity::where('requirement_id','=',$cat->id)->orderBy('term')->get();
         		foreach ($acts as $act) {
         			$sqlj .= ' inner join grade as g'.$count.' on g'.$count.'.id_number = student.id_number and g'.$count.'.act_id = '.$act->id;
         			$sqls .= ', g'.$count.'.score as s'.$count.', g'.$count.'.id as s'.$count.'id';

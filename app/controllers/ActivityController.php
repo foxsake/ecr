@@ -21,8 +21,9 @@ class ActivityController extends \BaseController {
 	 */
 	public function create()
 	{
-		$cl = Classes::find(Session::get('classid'));
-		$categ = Category::where('requirement_id','=',$cl->requirement_id)->orderBy('name')->lists('name','id');
+		$categ = Requirement::join('category','category.id','=','requirement.category_id')
+		->where('requirement.class_id','=',Session::get('classid'))->select('category.name as rname','requirement.id as rid')
+		->orderBy('category.name')->lists('rname','rid');
 		return View::make('faculty.activity.form')->with('categ',$categ);
 	}
 
@@ -39,7 +40,8 @@ class ActivityController extends \BaseController {
 		$act->name = $input['name'];
 		$act->max_score = $input["max_score"];
 		$act->term = $input['term'];
-		$act->category_id = $input['category_id'];
+		$act->requirement_id = $input['requirement_id'];
+		$act->class_id = Session::get('classid');
 		$act->date = $input['date'];
 		$act->save();
 
@@ -59,7 +61,7 @@ class ActivityController extends \BaseController {
         	$gr->act_id = $act->id;
         	$gr->score = $input['score'];
         	$gr->save();
-        	Grader::computeRaw($gr);
+        	//dd(Grader::computeRaw($gr));
         }
 		return Redirect::intended('/');
 	}

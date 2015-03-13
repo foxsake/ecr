@@ -7,7 +7,8 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"doctrine/dbal": "v2.4.2",
-		"schickling/backup": "0.6.*"
+		"schickling/backup": "0.6.*",
+		"barryvdh/laravel-dompdf": "0.4.*"
 	},
 	"autoload": {
 		"classmap": [

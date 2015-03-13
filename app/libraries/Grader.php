@@ -6,16 +6,18 @@ class Grader{
 	public static function computeRaw($g){
 		$grade = $g;
 		$activity = Activity::find($grade->act_id);
-		$category = Category::find($activity->category_id);
-		$reqid = $category->requirement_id;
+		//$requirement = Requirement::find($activity->requirement_id);
+		//$reqid = $category->requirement_id;
 
 		//grading vars
 		$total = 0.00;
 
-		$categs = Category::where('requirement_id','=',$reqid)->get();
+		$categs = Requirement::where('requirement.class_id','=',Session::get('classid'))->get();
+		//Requirement::join('category','category.id','=','requirement.category_id')
+		//->where('requirement.class_id','=',Session::get('classid'))->get();
 
 		foreach ($categs as $categ) {
-			$catacts = Activity::where('category_id','=',$categ->id)->orderBy('name')->get();
+			$catacts = Activity::where('requirement_id','=',$categ->id)->orderBy('name')->get();
 			$sum = 0.00;
 			$max = 0.00;
 

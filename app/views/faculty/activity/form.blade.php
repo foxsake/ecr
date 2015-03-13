@@ -21,8 +21,8 @@
         @endif
 
         <div class="form-group">
-            {{Form::label('category_id',"Category:")}}
-            {{Form::select('category_id', $categ, Input::old('category_id'),['class'=>'form-control'])}}
+            {{Form::label('requirement_id',"Category:")}}
+            {{Form::select('requirement_id', $categ, Input::old('requirement_id'),['class'=>'form-control'])}}
         </div>
         <div class="form-group">
             {{Form::label('name',"Name:")}}
