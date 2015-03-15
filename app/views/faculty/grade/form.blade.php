@@ -3,6 +3,7 @@
 		Grade
 @stop
 @section('content')
+        <div class="container">
         <div class="form-horizontal">
         <h1>{{$cl->catalogue_number}}</h1>
         <h3>{{ " Day: ".$cl->day." - Time: ".$cl->time." - Room: ".$cl->room }}</h3>
@@ -26,5 +27,6 @@
             {{Form::submit('Save',array('class'=>'btn btn-default'))}}
         </div>
             {{Form::close()}}
+        </div>
         </div>
 @stop

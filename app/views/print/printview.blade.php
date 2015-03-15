@@ -1,14 +1,51 @@
-@extends('master')
-@section('title')
-    Gradebook
-@stop
-@section('content')
-<div class="mycontainer">
-    <h1>{{$cl->catalogue_number}}</h1>
-    <h3>{{ " Day: ".$cl->day." - Time: ".$cl->time." - Room: ".$cl->room }}</h3>
-    <div><a href="{{URL::to('activity/create')}}">Add Activity</a></div>
-    <div class="gradebook-table marbot">
-    <table class="table table-bordered table-hover table-striped table-condensed nospace gradebook-table">
+<html>
+<head>
+	<title>My Report</title>	
+	<style type="text/css">
+	body{
+		width: 100%;
+		height: 100%;
+		margin: 0;
+	}
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: 0;
+  margin-left: 0;
+}
+table {
+	margin: 0 auto;
+    border-spacing: 0;
+    border-collapse: collapse;
+}	
+table, th, td {
+   border: 1px solid black;
+} 
+th,td{
+	text-align: right;
+	padding: 0 5px;
+}
+.nomar{
+	margin: 0;
+	padding: 0;
+}
+.marbot{
+	margin-bottom: 20px;
+}
+#ctxt{
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+	<!--<center>
+	<h3 class="nomar">Electronic Class Record</h3>
+	<h4 class="nomar marbot">for the IT Department</h4>
+	</center>-->
+	<h5 class="nomar">{{"Catalogue Number: ".$cl->catalogue_number}}</h5>
+    <h5 class="nomar marbot">{{ " Day: ".$cl->day." - Time: ".$cl->time." - Room: ".$cl->room }}</h5>
+	<table>
     <thead>
         <!--<tr>
             <th class="tabletxt">Term</th>
@@ -24,17 +61,17 @@
       
         </tr>-->
         <tr>
-            <th>Students</th>
-            <th>Raw Score</th>
+            <th id="ctxt">Students</th>
+            <th id="ctxt">Raw Score</th>
             @foreach($actnames as $actname)
-            	<th>{{ HTML::linkRoute('activity.show', $actname['name']." (".$actname['max'].")", $actname['id']) }}</th><!--dito!!-->
+            	<th id="ctxt">{{ $actname['name']." (".$actname['max'].")" }}</th><!--dito!!-->
             @endforeach
             @if(isset($leads[0]->lab_grade))
             <th>Lab Grade</th>
             @endif
         </tr>
         <tr>
-            <th>Date</th>
+            <th id="ctxt">Date</th>
             <td></td>
             @foreach($actnames as $actname)
                 <td>{{ $actname['date'] }}</td>
@@ -52,7 +89,7 @@
                 {{-- */$n = 's1'; $i = 1;/* --}}
                 @foreach($actnames as $actname)
                 {{-- */$link = $n.'id'/* --}}
-                	<td>{{HTML::linkRoute('grade.edit', $lead->$n, $lead->$link)}}</td>
+                	<td>{{ $lead->$n }}</td>
                 {{-- */$n = 's' . (++$i);/* --}}
                 @endforeach
                 @if(isset($lead->lab_grade))
@@ -62,11 +99,6 @@
     	 @endforeach
     </tbody>
 	</table>
-    </div>
-    {{ Form::open(array('route' => array('print.show',Session::get('classid')), 'method' => 'get')) }}
-        <button type="submit" class="btn btn-success btn-xs">Generate Report</button>
-    {{ Form::close() }}
 	</div>
-    
-    
-@stop
+</body>
+</html>

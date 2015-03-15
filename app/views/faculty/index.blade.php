@@ -3,6 +3,7 @@
     Class
 @stop
 @section('content')
+<div class="container">
     <h1>Manage Class</h1>
     <table class="table table-bordered table-hover">
     <thead>
@@ -40,4 +41,5 @@
     	 @endforeach
     </tbody>
 	</table>
+    </div>
 @stop

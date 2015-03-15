@@ -1,4 +1,4 @@
-<DOCTYPE <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <title>
@@ -15,8 +15,6 @@
     @if(!empty(Auth::user()) && Auth::user()->role = 'FACULTY')
         @include('navigation')
     @endif
-        <div class="container">
-            @yield('content')
-        </div>
+    @yield('content')
     </body>
 </html>

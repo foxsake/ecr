@@ -92,6 +92,26 @@ class GradeController extends \BaseController {
 		return Redirect::action('FacultyClassController@show',Session::get('classid'));
 	}
 
+	public function update2($id)
+	{
+		$scores = Input::get('scores');
+		$cl = Classes::find(Session::get('classid'));
+		$stud = Grade::join('roster','grade.id_number','=','roster.id_number')->join('student','student.id_number','=','roster.id_number')
+		->where('roster.subject_code','=',$cl->subject_code)->where('grade.act_id','=',$id)->orderBy('student.last_name')->select('grade.id as gradeid','roster.id as rosid')->get();
+		$inc = 0;
+		foreach ($stud as $stude) {
+			$sc = Grade::find($stude->gradeid);
+			$ros = Roster::find($stude->rosid);
+			$sc->score = $scores[$inc];
+			$sc->save();
+			$ros->subj_grade = Grader::computeWithLab($sc,Session::get('classid'));
+			$ros->save();
+			$inc++;
+		}
+
+		return Redirect::action('FacultyClassController@show',Session::get('classid'));
+	}
+
 	/**
 	 * Remove the specified resource from storage.
 	 * DELETE /grade/{id}

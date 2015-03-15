@@ -3,47 +3,60 @@
     Requirement
 @stop
 @section('content')
+<div class="container">
     <h1>Class Requirement</h1>
-            {{ Form::open(array('route' => 'requirement.store','class'=>'form-inline'))}}
+    <div class="row"><a href="{{ URL::to('category/create') }}">Add Category</a></div>
+            {{ Form::open(array('route' => 'requirement.store','class'=>'form-inline','id'=>'check'))}}
+        <div id="p_scents">
         <div class="form-group">
-            {{Form::label('category_id',"Category:")}}
-            {{Form::select('category_id', $categ, Input::old('category_id'),['class'=>'form-control'])}}
+            {{Form::select('categories[]', $categ, Input::old('category_ids[]'),['class'=>'form-control input-sm'])}}
+            {{Form::text('percentages[]',Input::old('percentages[]'),['class'=>'form-control input-sm'])}}
         </div>
+        </div>
+            <a id="addScnt" href="#" class="btn btn-info btn-xs">Add Requirement</a>
         <div class="form-group">
-            {{Form::label('percentage',"Percentage:")}}
-            {{Form::text('percentage',Input::old('percentage'),['class'=>'form-control'])}}
+            {{  Form::submit('Save',array('class'=>'btn btn-default'))   }}
         </div>
-        <div class="form-group">
-            {{Form::submit('Add',array('class'=>'btn btn-default'))}}
-        </div>
-        <div class="row"><a href="{{ URL::to('category/create') }}">Add Category</a></div>
         {{Form::close()}}
+    
+    </div>
+    {{ HTML::script('js/ajaxform.js') }}
+    <script type="text/javascript">
+        $(function() {
+        
+        $('#addScnt').on('click', function() {
+                $('<div class="form-group">'+
+                '{{Form::select("categories[]", $categ, Input::old("category_ids[]"),["class"=>"form-control input-sm"])}}'+
+                '{{Form::text("percentages[]",Input::old("percentages[]"),["class"=>"form-control input-sm"])}}'+
+                '<a href="#" id="remScnt" class="btn btn-xs btn-danger">Remove</a>'+
+                '</div>').appendTo('#p_scents');
+                return false;
+        });
 
-    <table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>Category</th>
-            <th>Percentage</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($leads as $lead)
-            <tr>
-                <td>{{$lead->name}}</td>
-                <td>{{$lead->percentage}}</td>
-                <!--<td>
-                    {{ Form::open(array('route' => array('requirement.edit',$lead->id), 'method' => 'get')) }}
-                        <button type="submit" class="btn btn-warning btn-xs">Edit</button>
-                    {{ Form::close() }}
-                </td>-->
-                <td>
-                    {{ Form::open(array('route' => array('requirement.destroy',$lead->id), 'method' => 'delete')) }}
-                        <button type="submit" class="btn btn-danger btn-xs">Delete</button>
-                    {{ Form::close() }}
-                </td>
-            </tr>
-         @endforeach
-    </tbody>
-    </table>
+        $(document).on('click','#remScnt',function() { 
+               $(this).parents('.form-group').remove();
+                return false;
+        });
+        });
+
+        $('#check').on('submit',function(){
+            var that = $(this),
+            total = 0;
+
+            that.find('[name]').each(function(index,value){
+            var that = $(this),
+            name = that.attr('name'),
+            val = that.val();
+            if(that.attr('type')=='text')
+                total += parseInt(val);
+            });
+
+            if(total != 100){
+                alert("total percentage should be 100");
+                return false;
+            }
+            return true;
+        });
+
+    </script>
 @stop

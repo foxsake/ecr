@@ -55,5 +55,10 @@ Route::group(array('before' => 'role2'), function()
 	Route::resource('class','FacultyClassController');
 	Route::resource('activity','ActivityController');
 	Route::resource('grade','GradeController');
+	Route::resource('print','PrintController');
+	Route::put('grade/update2/{id}', array(
+		'uses' => 'GradeController@update2',
+		'as' => 'grade.update2'
+		));
 });
 //Route::get('about', 'HomeController@about');

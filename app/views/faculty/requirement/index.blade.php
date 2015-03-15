@@ -23,6 +23,6 @@
     	 @endforeach
     </tbody>
 	</table>
+    <a href="{{URL::action('FacultyClassController@show',Session::get('classid'))}}">Show Class</a>
 	</div>
-    
 @stop

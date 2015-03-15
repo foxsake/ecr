@@ -29,9 +29,9 @@
                     @if ($errors->has('username') && $errors->has('password'))
                         <div class="alert alert-danger" role="alert"><p>ID Number and Password is required</p></div>
                     @elseif ($errors->has('username'))
-                        <div class="alert alert-danger" role="alert"><p>ID Number is required</p></div>
+                        <div class="alert alert-danger" role="alert"><p>{{ $errors->first('username') }}</p></div>
                     @else
-                        <div class="alert alert-danger" role="alert"><p>Password is required</p></div>
+                        <div class="alert alert-danger" role="alert"><p>{{ $errors->first('password') }}</p></div>
                     @endif
                 @endif
                 

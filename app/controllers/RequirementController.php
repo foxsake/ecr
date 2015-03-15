@@ -21,15 +21,7 @@ class RequirementController extends \BaseController {
 	 */
 	public function create()
 	{
-		$req = new Requirement();
-		$req->created_for_class = Session::get('classid');
-		$req->created_by = Auth::user()->username;
-		$req->save();
-		//dd($req->id);//set class requirement id to this// open new view..
-		$c = Classes::find(Session::get('classid'));
-		$c->requirement_id = $req->id;
-		$c->save();
-		return Redirect::to('category/'.$req->id);
+		//todo
 	}
 
 	/**
@@ -40,12 +32,17 @@ class RequirementController extends \BaseController {
 	 */
 	public function store()
 	{
-		$input = Input::all();
-		$req = new Requirement();
-		$req->class_id = Session::get('classid');
-		$req->percentage = $input['percentage'];
-		$req->category_id = $input['category_id'];
-		$req->save();
+		$percentages = Input::get('percentages');
+		$categories = Input::get('categories');
+
+		foreach ($percentages as $key => $n) {
+			$req = new Requirement();
+			$req->class_id = Session::get('classid');
+			$req->category_id = $categories[$key];
+			$req->percentage = $percentages[$key];
+			$req->save();
+		}
+		
 		return Redirect::route('requirement.show',Session::get('classid'));
 	}
 

@@ -11,8 +11,9 @@
     {{ HTML::style('css/bootstrap-datetimepicker.min.css') }}
 @stop
 @section('content')
-        
-        <div class="form-horizontal">
+        <div class="container">
+        <div class="row">
+        <div class="form-horizontal col-md-4">
         <h1>Activity</h1>
         @if(!isset($stud))
             {{ Form::open(array('route' => 'activity.store','class'=>'form-horizontal'))}}
@@ -41,15 +42,12 @@
             {{Form::select('term', array('first' => 'First Term', 'second' => 'Second Term', 'final' => 'Final Term'),Input::old('term'),['class'=>'form-control'])}}
         </div>
 
-        <div class="form-group">
+       <div class="form-group">
             {{Form::label('date',"Date:")}}
-            <div class="container">
-                <div class="row">
-                    <div class='col-sm-6'>
-                        <div class='input-group date' id='datetimepicker'>
-                            {{ Form::text('date', Input::old('date') , array('class' => 'form-control','placeholder' => 'YYYY-MM-DD','data-datepicker' => 'datepicker')) }}
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar">
-                        </div>
+            <div class='input-group date' id='datetimepicker'>
+                {{ Form::text('date', Input::old('date') , array('class' => 'form-control','placeholder' => 'YYYY-MM-DD','data-datepicker' => 'datepicker')) }}
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar">
+            </div>
                         <script type="text/javascript">
                             $(function () {
                                 $('#datetimepicker').datetimepicker({
@@ -58,10 +56,7 @@
                                 });
                             });
                         </script>
-                    </div>
-                </div>
-            </div>
-            </div>
+        </div>
         <div class="form-group">
         @if(!isset($stud))
             {{Form::submit('Create Activity',array('class'=>'btn btn-default'))}}
@@ -70,6 +65,8 @@
         @endif
         </div>
             {{Form::close()}}
+        </div>
+        </div>
         </div>
         {{ HTML::script('bootstrap/js/transition.js') }}
         {{ HTML::script('bootstrap/js/collapse.js') }}

@@ -64,4 +64,21 @@ class Grader{
 		}
 		return $lab + $lec;
 	}
+
+	/*public static function computePoint($passing){
+		//todo
+		$jump = round((100 - $passing)/9,2)+0.01;
+		$grd = array();
+		$pjump = $passing;
+		for($i=0; i<9; i++){
+			array_push($grd, $pjump);
+			$pjump += $jump;
+		}
+
+		for($i=7; i>=0; i--){
+			if($grade >= $pjump[i]){
+				//todo
+			}
+		}
+	}*/
 }

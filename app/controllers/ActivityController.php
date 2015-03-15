@@ -61,9 +61,9 @@ class ActivityController extends \BaseController {
         	$gr->act_id = $act->id;
         	$gr->score = $input['score'];
         	$gr->save();
-        	//dd(Grader::computeRaw($gr));
+        	Grader::computeWithLab($gr);//here
         }
-		return Redirect::intended('/');
+		return Redirect::action('FacultyClassController@show',Session::get('classid'));
 	}
 
 	/**
@@ -75,10 +75,17 @@ class ActivityController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$cl = Classes::find(Session::get('classid'));
 		$act = Activity::find($id);
-		$categ = Category::where('requirement_id','=',$cl->requirement_id)->orderBy('name')->lists('name','id');
-		return View::make('faculty.activity.show',compact('act','categ'));
+		$categ = Requirement::join('category','category.id','=','requirement.category_id')
+		->where('requirement.class_id','=',Session::get('classid'))->select('category.name as rname','requirement.id as rid')
+		->orderBy('category.name')->lists('rname','rid');
+		$cl = Classes::find(Session::get('classid'));
+
+		$stud = Roster::join('grade','grade.id_number','=','roster.id_number')->join('student','student.id_number','=','roster.id_number')
+		->where('roster.subject_code','=',$cl->subject_code)->where('grade.act_id','=',$id)->orderBy('student.last_name')
+		->select(DB::raw('CONCAT(last_name,", ", first_name," ", mi,".") as name'),'score')->get();
+		//dd($stud);
+		return View::make('faculty.activity.show',compact('act','categ','stud'));
 	}
 
 	/**
@@ -108,10 +115,10 @@ class ActivityController extends \BaseController {
 		$act->name = $input['name'];
 		$act->max_score = $input["max_score"];
 		$act->term = $input['term'];
-		$act->category_id = $input['category_id'];
+		$act->requirement_id = $input['requirement_id'];
 		$act->date = $input['date'];
 		$act->save();
-		return Redirect::intended('/');
+		return Redirect::action('FacultyClassController@show',Session::get('classid'));
 	}
 
 	/**
