@@ -37,7 +37,6 @@ class Grader{
 		return $total;
 	}
 
-	//ILOVEYOU MOST SWEETY!
 	//think of a better algorithim. but this will do for now;)
 	public static function computeWithLab($g,$cl){
 		$lec = Grader::computeRaw($g);
@@ -62,23 +61,30 @@ class Grader{
 			$lec *= 0.67;
 			$lab *= 0.33;
 		}
+
 		return $lab + $lec;
 	}
 
-	/*public static function computePoint($passing){
-		//todo
+	public static function computePoint($passing,$thegrade){
+		if($thegrade < $passing)
+			return 5.00;
 		$jump = round((100 - $passing)/9,2)+0.01;
 		$grd = array();
 		$pjump = $passing;
-		for($i=0; i<9; i++){
+		$pgrade;
+		for($i=0; $i<9; $i++){
 			array_push($grd, $pjump);
 			$pjump += $jump;
 		}
+		$increm = 1.0;
 
-		for($i=7; i>=0; i--){
-			if($grade >= $pjump[i]){
-				//todo
+		for($i=8; $i>=0; $i--){
+			if($thegrade >= $grd[$i]){
+				$pgrade = $increm;
+				break;
 			}
+			$increm+=0.25;
 		}
-	}*/
+		return $pgrade;
+	}
 }

@@ -3,6 +3,7 @@
     Class Students
 @stop
 @section('content')
+<div class="container">
     <h1>Manage Roster</h1>
     <div><a href="{{URL::to('admin/roster/create')}}">Add Student</a></div>
     <div>
@@ -35,5 +36,5 @@
     </tbody>
 	</table>
 	</div>
-    
+    </div>
 @stop

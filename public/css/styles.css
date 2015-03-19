@@ -3,6 +3,7 @@ body {
 	font-weight: 100;
 	//font-family: 'Lato';
 	font-family: 'Open Sans', sans-serif;
+	padding-top: 70px;
 }
 		    
 /*a{
@@ -46,13 +47,14 @@ body {
 }
 
 .top-buffer { 
-	margin-top: 15%; 
+	margin-top: 8%; 
 }
 
 .gradebook-table { 
-	overflow-x: scroll; 
+	//overflow-x: scroll; 
 	width: 100%;
 	height: 100%;
+	margin-top: 3px;
 }
 
 .mycontainer {
@@ -63,4 +65,24 @@ body {
 }
 .marbot{
 	margin-bottom: 15px;
+}
+/*
+::-webkit-input-placeholder {
+   text-align: center;
+}
+
+:-moz-placeholder { 
+   text-align: center;  
+}
+
+::-moz-placeholder {  
+   text-align: center;  
+}
+
+:-ms-input-placeholder {  
+   text-align: center; 
+}*/
+
+.center-txt{
+   text-align:center;
 }

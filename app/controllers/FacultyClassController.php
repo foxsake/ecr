@@ -46,6 +46,8 @@ class FacultyClassController extends \BaseController {
 	{
 		Session::put('classid', $id);
 		$cl = Classes::find($id);
+		if($cl->faculty_id_number != Auth::user()->username)
+			return Response::make('Unauthorized', 401);
 		$reqs = Requirement::join('category','category.id','=','requirement.category_id')->where('requirement.class_id','=',$id)->select('name','percentage')->get();
 		if($reqs->isEmpty()){
 			return Redirect::route('requirement.show',Session::get('classid'));
@@ -77,17 +79,17 @@ class FacultyClassController extends \BaseController {
         	->orderBy('last_name')
         	->get();*/
         	$count = 1;
-        	$sqls = 'select CONCAT(last_name,", ", first_name," ", mi,".") as name, roster.subj_grade';
+        	$sqls = 'select CONCAT(last_name,", ", first_name," ", mi,".") as name, roster.subj_grade, roster.subjpoint_grade';
         	$sqlj = '';
         	$sqln = ' from roster inner join student on roster.id_number = student.id_number and roster.subject_code = '.$cl->subject_code.' ';
         	//$cats = Category::where('requirement_id','=', $cl->requirement_id)->orderBy('name')->get();
         	$cats = Requirement::join('category','category.id','=','requirement.category_id')
 			->where('requirement.class_id','=',Session::get('classid'))->select('requirement.id as rid')
-			->orderBy('category.name')->get();
+			->orderBy('requirement.percentage')->get();
         	$actnames = array();
 
         	foreach ($cats as $cat) {
-        		$acts = Activity::where('requirement_id','=',$cat->rid)->where('class_id','=',Session::get('classid'))->orderBy('term')->get();
+        		$acts = Activity::where('requirement_id','=',$cat->rid)->where('class_id','=',Session::get('classid'))->orderBy('name')->orderBy('term')->get();
         		// /dd($acts);
         		foreach ($acts as $act) {
         			$sqlj .= ' inner join grade as g'.$count.' on g'.$count.'.id_number = student.id_number and g'.$count.'.act_id = '.$act->id;

@@ -103,7 +103,7 @@ Route::filter('role', function()
 	{
 		return Redirect::guest('/');
 	}
-    if(Auth::user()->role != 'super-user') 
+    if(Auth::user()->role != '1'&&Auth::user()->role != '2')//
     {
         return Redirect::to('/');
     }
@@ -115,7 +115,7 @@ Route::filter('role2', function()
 	{
 		return Redirect::guest('/login');
 	}
-    if(Auth::user()->role != 'FACULTY') 
+    if(Auth::user()->role != '3'&&Auth::user()->role != '2')//||
     {
         return Redirect::to('/admin');
     }

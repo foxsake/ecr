@@ -6,8 +6,8 @@
 <div class="mycontainer">
     <h1>{{$cl->catalogue_number}}</h1>
     <h3>{{ " Day: ".$cl->day." - Time: ".$cl->time." - Room: ".$cl->room }}</h3>
-    <div><a href="{{URL::to('activity/create')}}">Add Activity</a></div>
-    <div class="gradebook-table marbot">
+    <a href="{{URL::to('activity/create')}}" class="btn btn-info btn-xs">Add Activity</a>
+    <div class="marbot table-responsive">
     <table class="table table-bordered table-hover table-striped table-condensed nospace gradebook-table">
     <thead>
         <!--<tr>
@@ -25,20 +25,24 @@
         </tr>-->
         <tr>
             <th>Students</th>
-            <th>Raw Score</th>
             @foreach($actnames as $actname)
             	<th>{{ HTML::linkRoute('activity.show', $actname['name']." (".$actname['max'].")", $actname['id']) }}</th><!--dito!!-->
             @endforeach
             @if(isset($leads[0]->lab_grade))
             <th>Lab Grade</th>
             @endif
+            <th>Raw Score</th>
+            <th>Final Grade</th>
+            <th>Status</th>
         </tr>
         <tr>
             <th>Date</th>
-            <td></td>
             @foreach($actnames as $actname)
                 <td>{{ $actname['date'] }}</td>
             @endforeach
+            <td></td>
+            <td></td>
+            <td></td>
             @if(isset($leads[0]->lab_grade))
                 <th></th>
             @endif
@@ -48,7 +52,6 @@
     	@foreach($leads as $lead)
         	<tr>
                 <td>{{$lead->name}}</td>
-                <td>{{$lead->subj_grade}}</td>
                 {{-- */$n = 's1'; $i = 1;/* --}}
                 @foreach($actnames as $actname)
                 {{-- */$link = $n.'id'/* --}}
@@ -58,15 +61,32 @@
                 @if(isset($lead->lab_grade))
                     <td>{{ $lead->lab_grade }}</td>
                 @endif
+                <td>{{$lead->subj_grade}}</td>
+                <td>{{ $lead->subjpoint_grade }}</td>
+                <td>{{ $lead->subj_grade > $cl->passing ? "Passed":"Failed" }}</td>
             </tr>
     	 @endforeach
     </tbody>
 	</table>
     </div>
+    <div class="row">
+    <div class="col-md-1">
     {{ Form::open(array('route' => array('print.show',Session::get('classid')), 'method' => 'get')) }}
         <button type="submit" class="btn btn-success btn-xs">Generate Report</button>
     {{ Form::close() }}
+    </div>
+    <div class="col-md-1">
+        {{ Form::open(array('route' => array('print3',Session::get('classid')), 'method' => 'get')) }}
+        <button type="submit" class="btn btn-success btn-xs">Passed Report</button>
+    {{ Form::close() }}
+    </div>
+    <div class="col-md-1">
+        {{ Form::open(array('route' => array('print2',Session::get('classid')), 'method' => 'get')) }}
+        <button type="submit" class="btn btn-success btn-xs">Failed Report</button>
+    {{ Form::close() }}
+    </div>
+    
+    
+    </div>
 	</div>
-    
-    
 @stop

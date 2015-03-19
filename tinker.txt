@@ -15,3 +15,13 @@ $s->save();
 
 {{ Form::open(array('route' => 'faculty.store','class'=>'form-horizontal'))}}
 {{ Form::open(array('route' => ['faculty.update', $fac->id], 'method' => 'put', 'class'=>'form-horizontal'))}}
+
+passed students sql query!!!!!
+
+select CONCAT(last_name,", ", first_name," ", mi,".") as NAME, subj_grade as GRADE 
+from roster join student using(id_number) 
+where subject_code = 'class.subject_code' and subj_grade >= 'class.passing';
+
+select CONCAT(last_name,", ", first_name," ", mi,".") as NAME, subj_grade as GRADE 
+from roster join student using(id_number) 
+where subject_code = 'class.subject_code' and subj_grade < 'class.passing';

@@ -3,6 +3,7 @@
     Requirement
 @stop
 @section('content')
+<div class="container">
     <h1>Class Requirements</h1>
     <!--<div><a href="{{URL::to('admin/class/create')}}">Create Class</a></div>-->
     <div>
@@ -25,4 +26,5 @@
 	</table>
     <a href="{{URL::action('FacultyClassController@show',Session::get('classid'))}}">Show Class</a>
 	</div>
+</div>
 @stop

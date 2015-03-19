@@ -3,6 +3,7 @@
     Class
 @stop
 @section('content')
+<div class="container">
     <h1>Manage Class</h1>
     <div><a href="{{URL::to('admin/class/create')}}">Create Class</a></div>
     <div>
@@ -53,5 +54,5 @@
     </tbody>
 	</table>
 	</div>
-    
+    </div>
 @stop

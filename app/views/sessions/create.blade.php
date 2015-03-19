@@ -14,15 +14,13 @@
             <div class="col-md-4 col-md-offset-4">
                 {{ Form::open(array('route' => 'sessions.store','class'=>'form-horizontal'))}}
             <div class="form-group">
-                {{Form::label('username',"ID Number:")}}
-                {{Form::text('username',Input::old('username'),['class'=>'form-control'])}}
+                {{Form::text('username',Input::old('username'),['class'=>'form-control center-txt','placeholder' => 'ID Number'])}}
             </div>
             <div class="form-group">
-                {{Form::label('password',"Password:")}}
-                {{Form::password('password',['class'=>'form-control'])}}
+                {{Form::password('password',['class'=>'form-control center-txt','placeholder' => 'Password'])}}
             </div>
             <div class="form-group">
-                {{Form::submit('Login',array('class'=>'btn btn-default'))}}
+                {{Form::submit('Login',array('class'=>'btn btn-info form-control'))}}
             </div>
             <div class="form-group">
                 @if ($errors->has())

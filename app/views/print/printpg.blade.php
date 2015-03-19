@@ -8,7 +8,6 @@
 		width: 100%;
 		height: 100%;
 		margin: 0;
-        font-size: 11px;
 	}
 .container {
   padding-right: 15px;
@@ -65,47 +64,19 @@ th,td{
         </tr>-->
         <tr>
             <th class="ctxt">Students</th>
-            
-            @foreach($actnames as $actname)
-            	<th class="ctxt">{{ $actname['name']." (".$actname['max'].")" }}</th><!--dito!!-->
-            @endforeach
-            @if(isset($leads[0]->lab_grade))
-            <th>Lab Grade</th>
-            @endif
-            <th class="ctxt">Raw Score</th>
-            <th class="ctxt">Final</th>
+            <th class="ctxt">Final Grade</th>
             <th class="ctxt">Status</th>
-        </tr>
-        <tr>
-            <th class="ctxt">Date</th>
-            @foreach($actnames as $actname)
-                <td>{{ $actname['date'] }}</td>
-            @endforeach
-            @if(isset($leads[0]->lab_grade))
-                <th></th>
-            @endif
-            <td></td>
-            <td></td>
-            <td></td>
         </tr>
     </thead>
     <tbody>
     	@foreach($leads as $lead)
+    	@if($lead->subj_grade >= $cl->passing)
         	<tr>
                 <td>{{$lead->name}}</td>
-                {{-- */$n = 's1'; $i = 1;/* --}}
-                @foreach($actnames as $actname)
-                {{-- */$link = $n.'id'/* --}}
-                	<td>{{ $lead->$n }}</td>
-                {{-- */$n = 's' . (++$i);/* --}}
-                @endforeach
-                @if(isset($lead->lab_grade))
-                    <td>{{ $lead->lab_grade }}</td>
-                @endif
-                <td>{{$lead->subj_grade}}</td>
                 <td>{{ $lead->subjpoint_grade }}</td>
-                <td>{{ $lead->subj_grade > $cl->passing ? "Passed":"Failed" }}</td>
+                <td>{{ $lead->subj_grade >= $cl->passing ? "Passed":"Failed" }}</td>
             </tr>
+            @endif
     	 @endforeach
     </tbody>
 	</table>

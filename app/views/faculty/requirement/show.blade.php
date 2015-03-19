@@ -10,7 +10,7 @@
         <div id="p_scents">
         <div class="form-group">
             {{Form::select('categories[]', $categ, Input::old('category_ids[]'),['class'=>'form-control input-sm'])}}
-            {{Form::text('percentages[]',Input::old('percentages[]'),['class'=>'form-control input-sm'])}}
+            {{Form::text('percentages[]',Input::old('percentages[]'),['class'=>'form-control input-sm',"placeholder" => "Percentage"])}}
         </div>
         </div>
             <a id="addScnt" href="#" class="btn btn-info btn-xs">Add Requirement</a>
@@ -27,7 +27,7 @@
         $('#addScnt').on('click', function() {
                 $('<div class="form-group">'+
                 '{{Form::select("categories[]", $categ, Input::old("category_ids[]"),["class"=>"form-control input-sm"])}}'+
-                '{{Form::text("percentages[]",Input::old("percentages[]"),["class"=>"form-control input-sm"])}}'+
+                '{{Form::text("percentages[]",Input::old("percentages[]"),["class"=>"form-control input-sm","placeholder" => "Percentage"])}}'+
                 '<a href="#" id="remScnt" class="btn btn-xs btn-danger">Remove</a>'+
                 '</div>').appendTo('#p_scents');
                 return false;

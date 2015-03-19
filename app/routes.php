@@ -33,6 +33,7 @@ Route::group(array('before' => 'auth'), function(){
 			'as' => 'logout',
 			'uses' => 'SessionsController@destroy'
 		));
+		Route::resource('profile','ProfileController');
 });
 
 Route::group(array('before' => 'role'), function()
@@ -56,6 +57,14 @@ Route::group(array('before' => 'role2'), function()
 	Route::resource('activity','ActivityController');
 	Route::resource('grade','GradeController');
 	Route::resource('print','PrintController');
+	Route::get('print2/{id}', array(
+		'uses' => 'PrintController@show2',
+		'as' => 'print2'
+		));
+	Route::get('print3/{id}', array(
+		'uses' => 'PrintController@show3',
+		'as' => 'print3'
+		));
 	Route::put('grade/update2/{id}', array(
 		'uses' => 'GradeController@update2',
 		'as' => 'grade.update2'

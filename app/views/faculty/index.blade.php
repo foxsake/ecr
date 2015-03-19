@@ -13,7 +13,7 @@
             <th>Room</th>
             <th>Time</th>
             <th>Day</th>
-            <th>Type</th>
+            <!--<th>Type</th>-->
             <th></th>
             <th></th>
         </tr>
@@ -26,7 +26,7 @@
                 <td>{{$lead->room}}</td>
                 <td>{{$lead->time}}</td>
                 <td>{{$lead->day}}</td>
-                <td>{{$lead->type}}</td>
+                <!--<td>{{$lead->type}}</td>-->
                 <td>
                     {{ Form::open(array('route' => array('class.show',$lead->id), 'method' => 'get', 'class' => 'nospace')) }}
                         <button type="submit" class="btn btn-success btn-xs">View</button>

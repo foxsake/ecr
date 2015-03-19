@@ -3,6 +3,7 @@
     Faculty
 @stop
 @section('content')
+<div class="container">
     <h1>Manage Accounts</h1>
     <div><a href="{{URL::to('admin/faculty/create')}}">Create Account</a></div>
     <div>
@@ -39,4 +40,5 @@
     </tbody>
 	</table>
 	</div>
+    </div>
 @stop

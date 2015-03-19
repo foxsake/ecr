@@ -13,7 +13,7 @@
 @section('content')
         <div class="container">
         <div class="row">
-        <div class="form-horizontal col-md-4">
+        <div class="col-md-4">
         <h1>Activity</h1>
         @if(!isset($stud))
             {{ Form::open(array('route' => 'activity.store','class'=>'form-horizontal'))}}
@@ -39,7 +39,7 @@
         </div>
         <div class="form-group">
             {{Form::label('term',"Term:")}}
-            {{Form::select('term', array('first' => 'First Term', 'second' => 'Second Term', 'final' => 'Final Term'),Input::old('term'),['class'=>'form-control'])}}
+            {{Form::select('term', array('1' => 'First Term', '2' => 'Second Term', '3' => 'Final Term'),Input::old('term'),['class'=>'form-control'])}}
         </div>
 
        <div class="form-group">

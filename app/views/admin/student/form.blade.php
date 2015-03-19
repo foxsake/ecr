@@ -8,10 +8,12 @@
         @endif
 @stop
 @section('content')
-        <div>
-        <div class="form-horizontal">
+        <div class="container">
+        <div class="row">
+        <div class="col-md-4 col-md-offset-4">
         <h1>Student</h1>
-
+        </div>
+        <div class="col-md-4 col-md-offset-4">
         @if(!isset($stud))
             {{ Form::open(array('route' => 'admin.student.store','class'=>'form-horizontal'))}}
         @else
@@ -38,9 +40,10 @@
             {{Form::text('section',Input::old('section'),['class'=>'form-control'])}}
         </div>
         <div class="form-group">
-            {{Form::submit('Create Account',array('class'=>'btn btn-default'))}}
+            {{Form::submit('Save',array('class'=>'btn btn-default'))}}
         </div>
         {{Form::close()}}
+        </div>
         </div>
         </div>
 @stop

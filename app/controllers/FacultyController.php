@@ -45,7 +45,7 @@ class FacultyController extends \BaseController {
 		$faculty->mi = $input['mi'];
 		$faculty->id_number = $input['id_number'];
 		$user->username = $input['id_number'];
-		$user->role = "FACULTY";
+		$user->role = $input['role'];
 		$user->save();
 		$faculty->save();
 		return Redirect::action('FacultyController@index');
@@ -88,18 +88,23 @@ class FacultyController extends \BaseController {
 		$input = Input::all();
 		$faculty = Faculty::find($id);
 		$user = User::where('username', '=', $faculty->id_number)->first();
+
+		if(!empty($input['password']) && !empty($input['password2'])){
 		if($input['password'] == $input['password2'])
 			$user->password = Hash::make($input['password']);
 		else
-			return Redirect::intended('/faculty');
+			return Redirect::action('FacultyController@edit',$id);
+		}
+
 		$faculty->last_name = $input['last_name'];
 		$faculty->first_name = $input['first_name'];
 		$faculty->mi = $input['mi'];
 		$faculty->id_number = $input['id_number'];
+
 		$user->username = $input['id_number'];
-		//$user->role = "FACULTY";
-		$user->save();
+		$user->role = $input['role'];
 		$faculty->save();
+		$user->save();
 		return Redirect::action("SuperUserController@index");
 	}
 

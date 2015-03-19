@@ -86,6 +86,7 @@ class GradeController extends \BaseController {
 
 		//$ros->subj_grade = Grader::computeRaw($stud);
 		$ros->subj_grade = Grader::computeWithLab($stud,Session::get('classid'));
+		$ros->subjpoint_grade = Grader::computePoint($cl->passing,$ros->subj_grade);
 
 		$ros->save();
 		//dd($ros->id." ".Session::get('classid')." ".$stud->id." ".$cl->subject_code);
@@ -105,6 +106,7 @@ class GradeController extends \BaseController {
 			$sc->score = $scores[$inc];
 			$sc->save();
 			$ros->subj_grade = Grader::computeWithLab($sc,Session::get('classid'));
+			$ros->subjpoint_grade = Grader::computePoint($cl->passing,$ros->subj_grade);
 			$ros->save();
 			$inc++;
 		}

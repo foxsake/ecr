@@ -8,7 +8,7 @@
         @endif
 @stop
 @section('content')
-        <div>
+        <div class="container">
         <div class="form-horizontal">
         <h1>Add Student to Class</h1>
 

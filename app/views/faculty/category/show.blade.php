@@ -3,6 +3,7 @@
     Requirement
 @stop
 @section('content')
+<div class="container">
     <h1>Class Requirement</h1>
     <div><a href="{{URL::to('admin/class/create')}}">Create Class</a></div>
     <div>
@@ -49,5 +50,5 @@
             {{Form::submit('Add',array('class'=>'btn btn-default'))}}
         </div>
         {{Form::close()}}
-    
+    </div>
 @stop

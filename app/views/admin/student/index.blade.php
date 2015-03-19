@@ -3,6 +3,7 @@
     Students
 @stop
 @section('content')
+    <div class="container">
     <h1>Manage Students</h1>
     <div><a href="{{URL::to('admin/student/create')}}">Create Account</a></div>
     <div>
@@ -41,5 +42,5 @@
     </tbody>
 	</table>
 	</div>
-    
+    </div>
 @stop

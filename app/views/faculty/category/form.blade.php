@@ -3,6 +3,7 @@
     Requirement
 @stop
 @section('content')
+<div class="container">
 <div class="form-horizontal">
         <h1>Category</h1>
         @if(!isset($stud))
@@ -22,5 +23,6 @@
         @endif
         </div>
             {{Form::close()}}
+</div>
 </div>
 @stop

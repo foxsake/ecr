@@ -45,23 +45,28 @@ class ActivityController extends \BaseController {
 		$act->date = $input['date'];
 		$act->save();
 
-		$cl = Classes::find(Session::get('classid'));//refactor later!!!!
+		$cl = Classes::find(Session::get('classid'));
 		$studs = DB::table('roster')
         	->join('student', function($join) use(&$cl)
         	{
             	$join->on('roster.id_number', '=', 'student.id_number')
                		 ->where('roster.subject_code','=', $cl->subject_code);
         	})
+        		->select('roster.id as rid','student.id_number as sid')
         		->orderBy('last_name')
         		->get();
 
         foreach ($studs as $stud) {
         	$gr = new Grade();
-        	$gr->id_number = $stud->id_number;
+        	$gr->id_number = $stud->sid;
         	$gr->act_id = $act->id;
         	$gr->score = $input['score'];
         	$gr->save();
-        	Grader::computeWithLab($gr);//here
+        	//Grader::computeRaw($gr);
+        	$ros = Roster::find($stud->rid);
+        	$ros->subj_grade = Grader::computeWithLab($gr,$cl->id);
+        	$ros->subjpoint_grade = Grader::computePoint($cl->passing,$ros->subj_grade);
+        	$ros->save();
         }
 		return Redirect::action('FacultyClassController@show',Session::get('classid'));
 	}
@@ -84,7 +89,7 @@ class ActivityController extends \BaseController {
 		$stud = Roster::join('grade','grade.id_number','=','roster.id_number')->join('student','student.id_number','=','roster.id_number')
 		->where('roster.subject_code','=',$cl->subject_code)->where('grade.act_id','=',$id)->orderBy('student.last_name')
 		->select(DB::raw('CONCAT(last_name,", ", first_name," ", mi,".") as name'),'score')->get();
-		//dd($stud);
+		
 		return View::make('faculty.activity.show',compact('act','categ','stud'));
 	}
 

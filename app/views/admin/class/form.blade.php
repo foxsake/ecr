@@ -8,10 +8,12 @@
         @endif
 @stop
 @section('content')
-        <div>
-        <div class="form-horizontal">
+        <div class="container">
+        <div class="row">
+        <div class="col-md-4 col-md-offset-4">
         <h1>Class</h1>
-
+        </div>
+        <div class="col-md-4 col-md-offset-4">
         @if(!isset($stud))
             {{ Form::open(array('route' => 'admin.class.store','class'=>'form-horizontal'))}}
         @else
@@ -44,7 +46,7 @@
         </div>
         <div class="form-group">
             {{Form::label('lec_subject_code',"Lecture Subject Code: ")}}
-            {{Form::text('lec_subject_code',Input::old('lec_subject_code'),['class'=>'form-control'])}}
+            {{Form::text('lec_subject_code',Input::old('lec_subject_code'),['class'=>'form-control','placeholder'=>'Leave this field empty if not applicable'])}}
         </div>
 
         <div class="form-group">
@@ -58,13 +60,19 @@
         </div>
 
         <div class="form-group">
+            {{Form::label('passing',"Passing: ")}}
+            {{Form::text('passing',Input::old('passing'),['class'=>'form-control'])}}
+        </div>
+
+        <div class="form-group">
         @if(!isset($stud))
-            {{Form::submit('Create Account',array('class'=>'btn btn-default'))}}
+            {{Form::submit('Create Class',array('class'=>'btn btn-default'))}}
         @else
-            {{Form::submit('Edit Account',array('class'=>'btn btn-default'))}}
+            {{Form::submit('Edit Class',array('class'=>'btn btn-default'))}}
         @endif
         </div>
         {{Form::close()}}
+        </div>
         </div>
         </div>
 @stop
