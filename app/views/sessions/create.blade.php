@@ -7,7 +7,7 @@
         <div class="container top-buffer">
         <div class="row">
             <div class="col-md-4 col-md-offset-4 text-center">
-                <h2>Electronic Class Record<small><br>for It Department</small></h1>
+            <h2>Electronic Class Record<small><br>for It Department</small></h1>
             </div>    
         </div>
         <div class="row">

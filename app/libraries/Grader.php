@@ -37,7 +37,6 @@ class Grader{
 		return $total;
 	}
 
-	//think of a better algorithim. but this will do for now;)
 	public static function computeWithLab($g,$cl){
 		$lec = Grader::computeRaw($g);
 		$cla = Classes::find($cl);

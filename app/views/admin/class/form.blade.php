@@ -42,7 +42,7 @@
         </div>
         <div class="form-group">
             {{Form::label('type',"Type: ")}}
-            {{Form::text('type',Input::old('type'),['class'=>'form-control'])}}
+            {{Form::select('type', array('1' => 'LEC','2' => 'LAB'),Input::old('type'),['class'=>'form-control'])}}
         </div>
         <div class="form-group">
             {{Form::label('lec_subject_code',"Lecture Subject Code: ")}}

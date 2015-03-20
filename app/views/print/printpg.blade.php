@@ -41,12 +41,14 @@ th,td{
 </head>
 <body>
 	<div class="container">
-	<!--<center>
-	<h3 class="nomar">Electronic Class Record</h3>
-	<h4 class="nomar marbot">for the IT Department</h4>
-	</center>-->
-	<h5 class="nomar">{{"Catalogue Number: ".$cl->catalogue_number}}</h5>
-    <h5 class="nomar marbot">{{ " Day: ".$cl->day." - Time: ".$cl->time." - Room: ".$cl->room }}</h5>
+	<center>
+	<h3 class="nomar">Republic of the Philippines</h3>
+	<h4 class="nomar">CENTRAL LUZON STATE UNIVERSITY</h4>
+	<h5 class="nomar">Science City of Munoz, Nueva Ecija</h5>
+	
+	</center>
+	<h6 class="nomar">{{"Catalogue Number: ".$cl->catalogue_number}}</h6>
+    <h6 class="nomar marbot">{{ " Day: ".$cl->day." - Time: ".$cl->time." - Room: ".$cl->room }}</h6>
 	<table>
     <thead>
         <!--<tr>
