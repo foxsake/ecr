@@ -79,12 +79,12 @@ class FacultyClassController extends \BaseController {
         	->orderBy('last_name')
         	->get();*/
         	$count = 1;
-        	$sqls = 'select CONCAT(last_name,", ", first_name," ", mi,".") as name, roster.subj_grade, roster.subjpoint_grade';
+        	$sqls = 'select roster.id_number as sidn, CONCAT(last_name,", ", first_name," ", mi,".") as name, roster.subj_grade, roster.subjpoint_grade';
         	$sqlj = '';
         	$sqln = ' from roster inner join student on roster.id_number = student.id_number and roster.subject_code = '.$cl->subject_code.' ';
         	//$cats = Category::where('requirement_id','=', $cl->requirement_id)->orderBy('name')->get();
         	$cats = Requirement::join('category','category.id','=','requirement.category_id')
-			->where('requirement.class_id','=',Session::get('classid'))->select('requirement.id as rid')
+			->where('requirement.class_id','=',Session::get('classid'))->select('requirement.id as rid','category.name as catname','requirement.percentage as reqperc')
 			->orderBy('requirement.percentage')->get();
         	$actnames = array();
 

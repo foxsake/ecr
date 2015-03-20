@@ -28,6 +28,11 @@
             @foreach($actnames as $actname)
             	<th>{{ HTML::linkRoute('activity.show', $actname['name']." (".$actname['max'].")", $actname['id']) }}</th><!--dito!!-->
             @endforeach
+
+            @foreach($cats as $cat)
+                <th>{{ $cat->catname . '('.$cat->reqperc.')' }}</th>
+            @endforeach
+
             @if(isset($leads[0]->lab_grade))
             <th>Lab Grade</th>
             @endif
@@ -43,6 +48,11 @@
             <td></td>
             <td></td>
             <td></td>
+
+            @foreach($cats as $cat)
+                <th></th>
+            @endforeach
+
             @if(isset($leads[0]->lab_grade))
                 <th></th>
             @endif
@@ -58,6 +68,11 @@
                 	<td>{{HTML::linkRoute('grade.edit', $lead->$n, $lead->$link)}}</td>
                 {{-- */$n = 's' . (++$i);/* --}}
                 @endforeach
+
+                @foreach($cats as $cat)
+                    <td>{{ round(Grader::getAve($cat->rid,$lead->sidn),2) }}</td>
+                @endforeach
+
                 @if(isset($lead->lab_grade))
                     <td>{{ $lead->lab_grade }}</td>
                 @endif
