@@ -33,8 +33,9 @@ class RosterController extends \BaseController {
 	public function store()
 	{
 		$input = Input::all();
+		$cl = Classes::find(Session::get('classid'))->first();
 		$s = new Roster;
-		$s->subject_code = $input['subject_code'];
+		$s->subject_code = $cl->subject_code;
 		$s->id_number = $input['id_number'];
 		$s->save();
 		return Redirect::action('ClassController@index');//change

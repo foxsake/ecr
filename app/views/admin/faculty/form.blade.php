@@ -36,6 +36,10 @@
             {{Form::text('mi',Input::old('mi'),['class'=>'form-control'])}}
         </div>
         <div class="form-group">
+            {{Form::label('gender',"Gender:")}}
+            {{Form::select('gender', array('1' => 'Male','2' => 'Female'),Input::old('gender'),['class'=>'form-control'])}}
+        </div>
+        <div class="form-group">
             {{Form::label('role',"Role:")}}
             {{Form::select('role', array('3' => 'Faculty','2' => 'Admin Faculty'),Input::old('role'),['class'=>'form-control'])}}
         </div>

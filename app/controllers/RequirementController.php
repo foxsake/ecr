@@ -56,13 +56,14 @@ class RequirementController extends \BaseController {
 	public function show($id)
 	{
 		Session::put('classid', $id);
+		$stud = Classes::find($id);
 		$thesum = Requirement::join('category','category.id','=','requirement.category_id')->where('requirement.class_id','=',$id)->sum('percentage');
 		$leads = Requirement::join('category','category.id','=','requirement.category_id')->where('requirement.class_id','=',$id)->select('name','percentage')->get();
 		if(!$leads->isEmpty() && $thesum == 100){
-			return View::make('faculty.requirement.index',compact('leads'));
+			return View::make('faculty.requirement.index',compact('leads','stud'));
 		}else{
 			$categ =  Category::orderBy('name')->lists('name','id');
-			return View::make('faculty.requirement.show',compact('leads','categ'));
+			return View::make('faculty.requirement.show',compact('categ'));
 		}
 	}
 
@@ -75,7 +76,9 @@ class RequirementController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//$cs = Requirement::where('');
+		$leads = Requirement::join('category','category.id','=','requirement.category_id')->where('requirement.class_id','=',$id)->select('name','percentage')->get();
+		$categ =  Category::orderBy('name')->lists('name','id');
+		return View::make('faculty.requirement.show',compact('leads','categ'));
 	}
 
 	/**
@@ -87,7 +90,21 @@ class RequirementController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		Requirement::where('class_id','=',$id)->delete();
+		Activity::where('class_id','=',$id)->delete();
+
+		$percentages = Input::get('percentages');
+		$categories = Input::get('categories');
+
+		foreach ($percentages as $key => $n) {
+			$req = new Requirement();
+			$req->class_id = Session::get('classid');
+			$req->category_id = $categories[$key];
+			$req->percentage = $percentages[$key];
+			$req->save();
+		}
+		
+		return Redirect::route('requirement.show',Session::get('classid'));
 	}
 
 	/**

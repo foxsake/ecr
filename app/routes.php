@@ -69,5 +69,9 @@ Route::group(array('before' => 'role2'), function()
 		'uses' => 'GradeController@update2',
 		'as' => 'grade.update2'
 		));
+	Route::post('class/passing', array(
+		'uses' => 'ClassController@updatePassing',
+		'as' => 'class.passing'
+		));
 });
 //Route::get('about', 'HomeController@about');

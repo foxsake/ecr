@@ -17,11 +17,7 @@
         @else
             {{ Form::model($stud, ['route' => ['admin.roster.update', $stud->id], 'method' => 'put']) }}
         @endif
-
-        <div class="form-group">
-            {{Form::label('subject_code',"Subject Code:")}}
-            {{Form::text('subject_code',Input::old('subject_code'),['class'=>'form-control'])}}
-        </div>
+        
         <div class="form-group">
             {{Form::label('id_number',"ID Number:")}}
             {{Form::text('id_number',Input::old('id_number'),['class'=>'form-control'])}}

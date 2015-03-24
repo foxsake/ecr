@@ -27,6 +27,9 @@ th,td{
 	text-align: right;
 	padding: 0 5px;
 }
+.paddtop{
+    margin-top: 20px;
+}
 .nomar{
 	margin: 0;
 	padding: 0;
@@ -82,6 +85,12 @@ th,td{
     	 @endforeach
     </tbody>
 	</table>
+    @if ($faculty->gender==1)
+        <center><h4 class="nomar paddtop">{{  'Mr. '.$faculty->name }}</h4></center>
+    @else
+        <center><h4 class="nomar paddtop">{{  'Ms. '.$faculty->name }}</h4></center>
+    @endif
+    <center><h5 class="nomar">Prepared By</h5></center>
 	</div>
 </body>
 </html>

@@ -21,7 +21,6 @@
             @foreach($cats as $cat)
             	<th colspan="3" class="tabletxt">{{ $cat->name }}</th>
             @endforeach
-      
         </tr>-->
         <tr>
             <th>Students</th>
@@ -85,23 +84,21 @@
 	</table>
     </div>
     <div class="row">
-    <div class="col-md-1">
+    <div class="col-md-2">
     {{ Form::open(array('route' => array('print.show',Session::get('classid')), 'method' => 'get')) }}
-        <button type="submit" class="btn btn-success btn-xs">Generate Report</button>
+        <button type="submit" class="btn btn-success btn-xs">Generate Class Report</button>
     {{ Form::close() }}
     </div>
-    <div class="col-md-1">
+    <div class="col-md-2">
         {{ Form::open(array('route' => array('print3',Session::get('classid')), 'method' => 'get')) }}
-        <button type="submit" class="btn btn-success btn-xs">Passed Report</button>
+        <button type="submit" class="btn btn-success btn-xs">Generate Passed Report</button>
     {{ Form::close() }}
     </div>
-    <div class="col-md-1">
+    <div class="col-md-2">
         {{ Form::open(array('route' => array('print2',Session::get('classid')), 'method' => 'get')) }}
-        <button type="submit" class="btn btn-success btn-xs">Failed Report</button>
+        <button type="submit" class="btn btn-success btn-xs">Generate Failed Report</button>
     {{ Form::close() }}
     </div>
-    
-    
     </div>
 	</div>
 @stop

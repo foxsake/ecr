@@ -5,17 +5,44 @@
 @section('content')
 <div class="container">
     <h1>Class Requirement</h1>
+    @if (isset($leads))
+    <table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Percentage</th>
+            <!--ilagay din yung mga activity dito sana.. para sa pag view ng activities?-->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($leads as $lead)
+            <tr>
+                <td>{{$lead->name}}</td>
+                <td>{{$lead->percentage}}</td>
+            </tr>
+         @endforeach
+    </tbody>
+    </table>
+    @endif
     <div class="row"><a href="{{ URL::to('category/create') }}">Add Category</a></div>
-            {{ Form::open(array('route' => 'requirement.store','class'=>'form-inline','id'=>'check'))}}
+            @if (isset($leads))
+                {{ Form::open(array('route' => array('requirement.update',Session::get('classid')),'class'=>'form-inline','id'=>'check','method'=>'put'))}}
+            @else
+                {{ Form::open(array('route' => 'requirement.store','class'=>'form-inline','id'=>'check'))}}
+            @endif
+            
         <div id="p_scents">
         <div class="form-group">
             {{Form::select('categories[]', $categ, Input::old('category_ids[]'),['class'=>'form-control input-sm'])}}
             {{Form::text('percentages[]',Input::old('percentages[]'),['class'=>'form-control input-sm',"placeholder" => "Percentage"])}}
         </div>
         </div>
-            <a id="addScnt" href="#" class="btn btn-info btn-xs">Add Requirement</a>
         <div class="form-group">
-            {{  Form::submit('Save',array('class'=>'btn btn-default'))   }}
+            <a id="addScnt" href="#" class="btn btn-info btn-xs">Add Requirement</a>
+        </div>
+        <br>
+        <div class="form-group">
+            {{  Form::submit('Save',array('class'=>'btn btn-default form-control'))   }}
         </div>
         {{Form::close()}}
     
@@ -25,16 +52,16 @@
         $(function() {
         
         $('#addScnt').on('click', function() {
-                $('<div class="form-group">'+
+                $('<div class="fgr"><div class="form-group">'+
                 '{{Form::select("categories[]", $categ, Input::old("category_ids[]"),["class"=>"form-control input-sm"])}}'+
                 '{{Form::text("percentages[]",Input::old("percentages[]"),["class"=>"form-control input-sm","placeholder" => "Percentage"])}}'+
                 '<a href="#" id="remScnt" class="btn btn-xs btn-danger">Remove</a>'+
-                '</div>').appendTo('#p_scents');
+                '</div></div>').appendTo('#p_scents');
                 return false;
         });
 
         $(document).on('click','#remScnt',function() { 
-               $(this).parents('.form-group').remove();
+               $(this).parents('.fgr').remove();
                 return false;
         });
         });
@@ -57,6 +84,5 @@
             }
             return true;
         });
-
     </script>
 @stop

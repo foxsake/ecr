@@ -61,6 +61,7 @@ class ClassController extends \BaseController {
 	 */
 	public function show($id)
 	{
+		Session::put('classid',$id);
 		$c = Classes::find($id);
 		$leads = DB::table('student')
         ->join('roster', function($join) use( &$c)
@@ -111,6 +112,15 @@ class ClassController extends \BaseController {
 		$s->passing = $input['passing'];
 		$s->save();
 		return Redirect::action('ClassController@index');
+	}
+
+	public function updatePassing()
+	{
+		$input = Input::all();
+		$s = Classes::find(Session::get('classid'));
+		$s->passing = $input['passing'];
+		$s->save();
+		return Redirect::back();
 	}
 
 	/**

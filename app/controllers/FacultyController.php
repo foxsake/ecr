@@ -44,6 +44,7 @@ class FacultyController extends \BaseController {
 		$faculty->first_name = $input['first_name'];
 		$faculty->mi = $input['mi'];
 		$faculty->id_number = $input['id_number'];
+		$faculty->gender = $input['gender'];
 		$user->username = $input['id_number'];
 		$user->role = $input['role'];
 		$user->save();
@@ -100,12 +101,13 @@ class FacultyController extends \BaseController {
 		$faculty->first_name = $input['first_name'];
 		$faculty->mi = $input['mi'];
 		$faculty->id_number = $input['id_number'];
+		$faculty->gender = $input['gender'];
 
 		$user->username = $input['id_number'];
 		$user->role = $input['role'];
 		$faculty->save();
 		$user->save();
-		return Redirect::action("SuperUserController@index");
+		return Redirect::action('FacultyController@index');
 	}
 
 	/**

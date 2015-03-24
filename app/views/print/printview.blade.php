@@ -35,6 +35,9 @@ th,td{
 .marbot{
 	margin-bottom: 20px;
 }
+.paddtop{
+    margin-top: 20px;
+}
 .ctxt{
 	text-align: center;
 }
@@ -71,6 +74,11 @@ th,td{
             @foreach($actnames as $actname)
             	<th class="ctxt">{{ $actname['name']." (".$actname['max'].")" }}</th><!--dito!!-->
             @endforeach
+
+            @foreach($cats as $cat)
+                <th>{{ $cat->catname . '('.$cat->reqperc.')' }}</th>
+            @endforeach
+
             @if(isset($leads[0]->lab_grade))
             <th>Lab Grade</th>
             @endif
@@ -78,7 +86,7 @@ th,td{
             <th class="ctxt">Final</th>
             <th class="ctxt">Status</th>
         </tr>
-        <tr>
+        <!--<tr>
             <th class="ctxt">Date</th>
             @foreach($actnames as $actname)
                 <td>{{ $actname['date'] }}</td>
@@ -89,7 +97,7 @@ th,td{
             <td></td>
             <td></td>
             <td></td>
-        </tr>
+        </tr>-->
     </thead>
     <tbody>
     	@foreach($leads as $lead)
@@ -101,6 +109,11 @@ th,td{
                 	<td>{{ $lead->$n }}</td>
                 {{-- */$n = 's' . (++$i);/* --}}
                 @endforeach
+
+                @foreach($cats as $cat)
+                    <td>{{ round(Grader::getAve($cat->rid,$lead->sidn),2) }}</td>
+                @endforeach
+
                 @if(isset($lead->lab_grade))
                     <td>{{ $lead->lab_grade }}</td>
                 @endif
@@ -111,6 +124,12 @@ th,td{
     	 @endforeach
     </tbody>
 	</table>
+    @if ($faculty->gender==1)
+        <center><h4 class="nomar paddtop">{{  'Mr. '.$faculty->name }}</h4></center>
+    @else
+        <center><h4 class="nomar paddtop">{{  'Ms. '.$faculty->name }}</h4></center>
+    @endif
+    <center><h5 class="nomar">Prepared By</h5></center>
 	</div>
 </body>
 </html>

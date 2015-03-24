@@ -29,12 +29,12 @@
                 <!--<td>{{$lead->type}}</td>-->
                 <td>
                     {{ Form::open(array('route' => array('class.show',$lead->id), 'method' => 'get', 'class' => 'nospace')) }}
-                        <button type="submit" class="btn btn-success btn-xs">View</button>
+                        <button type="submit" class="btn btn-success btn-xs">View Class</button>
                     {{ Form::close() }}
                 </td>
                 <td>
                    	{{ Form::open(array('route' => array('requirement.show',$lead->id), 'method' => 'get', 'class' => 'nospace')) }}
-                       	<button type="submit" class="btn btn-warning btn-xs">Syllabus</button>
+                       	<button type="submit" class="btn btn-warning btn-xs">Class Settings</button>
                    	{{ Form::close() }}
                 </td>
             </tr>
